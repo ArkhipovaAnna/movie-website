@@ -1,7 +1,10 @@
+import HomePage from "../pages/HomePage/HomePage";
+import './styles';
+
 function App() {
 
   return (
-    <h1>Hello!</h1>
+    <HomePage />
   )
 }
 
