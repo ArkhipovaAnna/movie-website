@@ -1,15 +1,20 @@
-import Button from "../../shared/ui/Button/Button";
+import InfoResult from "./InfoResult";
+import Poster from "./Poster";
+import type { Movie } from "../../entities/movie/interfaces";
 import styles from './SearchResult.module.scss';
 
-const SearchResult = () => {
+interface SearchResultProps {
+    data: Movie;
+}
+
+const SearchResult = ({ data }: SearchResultProps) => {
+
     return (
         <div className={styles.wrapper}>
-            <h1>Movie title</h1>
-            <p>Film synopsis</p>
-            <img src='/images/stars.svg' alt='Rating'></img>
-            <Button>Watch now</Button>
-            <Button>Trailer</Button>
+            <Poster data={data} />
+            <InfoResult data={data} />
         </div>
+
     )
 }
 

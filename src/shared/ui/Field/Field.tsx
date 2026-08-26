@@ -5,9 +5,7 @@ interface FieldProps {
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Field = (props: FieldProps) => {
-
-    const { value, onChange } = props;
+const Field = ({ value, onChange }: FieldProps) => {
 
     return (
         <input

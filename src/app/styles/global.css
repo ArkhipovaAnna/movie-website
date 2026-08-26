@@ -3,5 +3,11 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Oswald', sans-serif;
-    background-color: rgb(135, 206, 250);
+    color: white;
+    background-color: #3b3b3f;
+
+}
+
+li {
+    list-style-type: none
 }

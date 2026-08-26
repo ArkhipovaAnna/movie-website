@@ -1,10 +1,10 @@
-import HomePage from "../pages/HomePage/HomePage";
-import './styles';
+import RouterProvider from './providers/router/RouterProvider'
+import './styles'
 
 function App() {
 
   return (
-    <HomePage />
+    <RouterProvider />
   )
 }
 
