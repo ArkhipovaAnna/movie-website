@@ -4,8 +4,11 @@
     box-sizing: border-box;
     font-family: 'Oswald', sans-serif;
     color: white;
-    background-color: #3b3b3f;
 
+}
+
+body {
+    background-color: #3b3b3f;
 }
 
 li {

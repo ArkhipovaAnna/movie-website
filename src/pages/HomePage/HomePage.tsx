@@ -1,6 +1,7 @@
 // import { Link } from "react-router"
 import type { Movie } from "../../entities/movie/interfaces"
 import { DotLoader } from "react-spinners"
+import MoviePreview from "../../shared/ui/MoviePreview/MoviePreview"
 import styles from './HomePage.module.scss'
 
 interface HomePageProps {
@@ -29,7 +30,7 @@ const HomePage = ({ data }: HomePageProps) => {
             <div className={styles.wrapper}>
                 <ul>
                     {data.map(movie => (
-                        <li key={movie.filmId}>{movie.nameRu || movie.nameEn}</li>
+                        <li key={movie.filmId}><MoviePreview movie={movie} /></li>
                     ))}
                 </ul>
             </div>

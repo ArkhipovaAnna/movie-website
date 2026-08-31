@@ -1,21 +1,25 @@
-import styles from './Button.module.scss';
+import MuiButton from '@mui/material/Button';
 
 interface ButtonProps {
     children: string;
     onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-    className?: string;
+    variant?: 'text' | 'contained' | 'outlined';
 }
-
-const Button = ({ children, onClick, className }: ButtonProps) => {
+const Button = ({ children, variant, onClick }: ButtonProps) => {
 
     return (
-        <button
-            className={`${styles.button} ${className || ''}`}
+        <MuiButton
             onClick={onClick}
+            variant={variant}
+            size="small"
+            sx={{
+                backgroundColor: 'gray',
+                color: 'black',
+            }}
         >
             {children}
-        </button>
-    )
+        </MuiButton>
+    );
 
 }
 

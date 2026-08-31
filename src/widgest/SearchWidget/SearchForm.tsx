@@ -26,6 +26,7 @@ const SearchForm = ({ setQuery }: SearchFormProps) => {
                 onChange={(event) => setInputValue(event.target.value)} />
             <Button
                 onClick={handleClick}
+                variant="contained"
             >
                 Search</Button>
         </form>

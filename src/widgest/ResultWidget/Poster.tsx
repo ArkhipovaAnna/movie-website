@@ -9,9 +9,12 @@ interface SearchResultProps {
 const Poster = ({ data }: SearchResultProps) => {
 
     if (data !== null) {
+
+        const isNoPoster = data.posterUrl === 'https://kinopoiskapiunofficial.tech/images/posters/kp/no-poster.png';
+
         return (
             <div className={styles.wrapper}>
-                <img src={data.posterUrl} alt='Poster'></img>
+                <img src={isNoPoster ? '/images/poster-placeholder.svg' : data.posterUrl} alt='Poster' />
             </div>
         )
     }
