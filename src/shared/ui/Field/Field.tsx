@@ -1,4 +1,3 @@
-import styles from './Field.module.scss';
 import TextField from '@mui/material/TextField';
 
 interface FieldProps {
@@ -14,6 +13,8 @@ const Field = ({ value, onChange }: FieldProps) => {
             onChange={onChange}
             variant="outlined"
             size="small"
+            autoComplete="off"
+            placeholder="Enter the movie title"
             sx={{
                 width: '40vw',
                 '& .MuiOutlinedInput-root': {
@@ -27,7 +28,6 @@ const Field = ({ value, onChange }: FieldProps) => {
                     },
                 },
             }}
-            placeholder="Enter the movie title"
         />
     )
 }

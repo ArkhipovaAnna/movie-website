@@ -3,15 +3,16 @@ import { Outlet } from "react-router";
 import SearchForm from "../SearchWidget/SearchForm"
 
 interface LayoutProps {
-    setQuery: (value: string) => void
+    setQuery: (value: string) => void;
+    setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const Layout = ({ setQuery }: LayoutProps) => {
+const Layout = ({ setQuery, setPage }: LayoutProps) => {
 
     return (
         <>
             <header>
-                <SearchForm setQuery={setQuery} />
+                <SearchForm setQuery={setQuery} setPage={setPage} />
             </header>
             <main>
                 <Outlet />

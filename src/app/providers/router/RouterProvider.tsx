@@ -12,12 +12,22 @@ const RouterProvider = () => {
         return sessionStorage.getItem('query') || '';
     });
 
-    const data = useSearch(query);
+    const [page, setPage] = useState(1);
+    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        setPage(value);
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+        });
+    };
+
+    const { movies, pages } = useSearch(query, page);
 
     return (
         <Routes>
-            <Route element={<Layout setQuery={setQuery} />}>
-                <Route path='/' element={<HomePage data={data} />} />
+            <Route element={<Layout setQuery={setQuery} setPage={setPage} />}>
+                <Route path='/' element={<HomePage movies={movies} pages={pages} page={page} onChange={handleChange} />} />
                 <Route path='/details' element={<DetailsPage />} />
             </Route>
             <Route path='*' element={<NotFound />} />

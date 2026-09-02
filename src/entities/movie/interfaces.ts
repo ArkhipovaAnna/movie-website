@@ -12,4 +12,5 @@ export interface Movie {
     ratingVoteCount: string;
     posterUrl: string;
     posterUrlPreview: string;
+    kinopoiskId?: number;
 }

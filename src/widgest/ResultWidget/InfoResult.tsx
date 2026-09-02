@@ -15,7 +15,7 @@ const InfoResult = ({ data }: SearchResultProps) => {
             <Button onClick={(event) => event.preventDefault()}>Read more</Button>
             <Button
                 onClick={(event) => event.preventDefault()}
-                className={styles.specialButton}
+            // className={styles.specialButton}
             >
                 Trailer
             </Button>

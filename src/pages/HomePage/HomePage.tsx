@@ -1,24 +1,28 @@
 // import { Link } from "react-router"
 import type { Movie } from "../../entities/movie/interfaces"
 import { DotLoader } from "react-spinners"
+import Pagination from "../../shared/ui/Pagination/Pagination"
 import MoviePreview from "../../shared/ui/MoviePreview/MoviePreview"
 import styles from './HomePage.module.scss'
 
 interface HomePageProps {
-    data: Movie[] | null | 'Not found';
+    movies: Movie[] | null | 'Not found';
+    pages: number;
+    page: number;
+    onChange: (event: React.ChangeEvent<unknown>, value: number) => void;
 }
 
 
-const HomePage = ({ data }: HomePageProps) => {
+const HomePage = ({ movies, pages, page, onChange }: HomePageProps) => {
 
-    if (data === "Not found") {
+    if (movies === "Not found") {
         return (
             <div className={styles.notFound}>
                 <p>Nothing was found☹️</p>
                 <p>Here is what might interest you...</p>
             </div>
         )
-    } else if (data === null) {
+    } else if (movies === null) {
         return (
             <div className={styles.loader}>
                 <DotLoader size={90} color="#fdd510" />
@@ -27,16 +31,19 @@ const HomePage = ({ data }: HomePageProps) => {
 
     } else {
         return (
-            <div className={styles.wrapper}>
-                <ul>
-                    {data.map(movie => (
-                        <li key={movie.filmId}><MoviePreview movie={movie} /></li>
-                    ))}
-                </ul>
+            <div className={styles.container}>
+                <div className={styles.wrapper}>
+                    <ul>
+                        {movies.map(movie => (
+                            <li key={movie.filmId || movie.kinopoiskId}><MoviePreview movie={movie} /></li>
+                        ))}
+                    </ul>
+                </div>
+                <Pagination count={pages} page={page} onChange={onChange} />
             </div>
         )
     }
 
 }
 
-export default HomePage;
+export default HomePage

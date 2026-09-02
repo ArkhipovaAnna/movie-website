@@ -1,6 +1,13 @@
+.container {
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .wrapper {
     width: 70vw;
-    margin: 50px auto 100px;
+    margin: 50px auto 20px;
     background-color: #28282b;
     border: 2px solid black;
     border-bottom: none;

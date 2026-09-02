@@ -3,6 +3,10 @@
     padding: 15px 15px 30px 30px;
 }
 
+.wrapper h2 {
+    font-weight: 400;
+}
+
 .content {
     display: flex;
     column-gap: 30px;
@@ -18,8 +22,8 @@
     width: 12vw;
     aspect-ratio: 2/3;
     object-fit: cover;
-    box-shadow: -3px 3px 10px 1px;
     border-radius: 5px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
 }
 
 .genres {
@@ -28,6 +32,8 @@
 
 .description {
     margin-top: 30px;
+    font-weight: 400;
+    color: #cbcbcb;
     display: -webkit-box;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
