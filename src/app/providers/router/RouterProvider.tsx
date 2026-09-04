@@ -19,6 +19,7 @@ const RouterProvider = () => {
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
+        sessionStorage.setItem('page', String(value));
         window.scrollTo({
             top: 0,
             left: 0,

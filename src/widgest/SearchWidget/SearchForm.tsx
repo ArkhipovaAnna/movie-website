@@ -18,6 +18,7 @@ const SearchForm = ({ setQuery, setPage }: SearchFormProps) => {
         event.preventDefault();
         setQuery(inputValue);
         setPage(1);
+        sessionStorage.setItem('page', '1');
         sessionStorage.setItem('query', inputValue);
     }
 
@@ -25,6 +26,7 @@ const SearchForm = ({ setQuery, setPage }: SearchFormProps) => {
         event.preventDefault();
         setQuery(inputValue);
         setPage(1);
+        sessionStorage.setItem('page', '1');
         sessionStorage.setItem('query', inputValue);
     };
 
