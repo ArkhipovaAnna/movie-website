@@ -12,7 +12,11 @@ const RouterProvider = () => {
         return sessionStorage.getItem('query') || '';
     });
 
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(() => {
+        const saved = sessionStorage.getItem('page');
+        return saved ? Number(saved) : 1;
+    });
+
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
         window.scrollTo({

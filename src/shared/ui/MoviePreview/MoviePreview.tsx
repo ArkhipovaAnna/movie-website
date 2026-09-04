@@ -32,7 +32,10 @@ const MoviePreview = ({ movie }: MoviePreviewProps) => {
 
     return (
         <div className={styles.wrapper}>
-            <h2>{movie.nameRu || movie.nameEn}</h2>
+            <div className={styles.header}>
+                <h2>{movie.nameRu || movie.nameEn}</h2>
+                <div>Rating</div>
+            </div>
             <div className={styles.content}>
                 <div className={styles.imgWrapper}>
                     <img src={isNoPosterPreview ? '/images/poster-placeholder.svg' : movie.posterUrlPreview} alt='Poster' />
