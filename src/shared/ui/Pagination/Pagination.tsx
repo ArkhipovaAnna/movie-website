@@ -1,16 +1,16 @@
-import MuiPagination from '@mui/material/Pagination';
+import MuiPagination from '@mui/material/Pagination'
 
 interface PaginationProps {
     count: number;
-    page: number;
+    currentPage: number;
     onChange: (event: React.ChangeEvent<unknown>, value: number) => void;
 }
 
-const Pagination = ({ count, page, onChange }: PaginationProps) => {
+const Pagination = ({ count, currentPage, onChange }: PaginationProps) => {
     return (
         <MuiPagination
             count={count}
-            page={page}
+            page={currentPage}
             onChange={onChange}
             variant="outlined"
             color="primary"

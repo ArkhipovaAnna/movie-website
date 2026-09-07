@@ -12,14 +12,14 @@ const RouterProvider = () => {
         return sessionStorage.getItem('query') || '';
     });
 
-    const [page, setPage] = useState(() => {
-        const saved = sessionStorage.getItem('page');
+    const [currentPage, setCurrentPage] = useState(() => {
+        const saved = sessionStorage.getItem('currentPage');
         return saved ? Number(saved) : 1;
     });
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-        setPage(value);
-        sessionStorage.setItem('page', String(value));
+        setCurrentPage(value);
+        sessionStorage.setItem('currentPage', String(value));
         window.scrollTo({
             top: 0,
             left: 0,
@@ -27,12 +27,12 @@ const RouterProvider = () => {
         });
     };
 
-    const { movies, pages } = useSearch(query, page);
+    const { movies, totalPages } = useSearch(query, currentPage);
 
     return (
         <Routes>
-            <Route element={<Layout setQuery={setQuery} setPage={setPage} />}>
-                <Route path='/' element={<HomePage movies={movies} pages={pages} page={page} onChange={handleChange} />} />
+            <Route element={<Layout setQuery={setQuery} setCurrentPage={setCurrentPage} />}>
+                <Route path='/' element={<HomePage movies={movies} totalPages={totalPages} currentPage={currentPage} onChange={handleChange} />} />
                 <Route path='/details' element={<DetailsPage />} />
             </Route>
             <Route path='*' element={<NotFound />} />

@@ -2,18 +2,19 @@
 import type { Movie } from "../../entities/movie/interfaces"
 import { DotLoader } from "react-spinners"
 import Pagination from "../../shared/ui/Pagination/Pagination"
+import { ArrowDown, ArrowUp } from "../../shared/ui/Arrows/Arrows"
 import MoviePreview from "../../shared/ui/MoviePreview/MoviePreview"
 import styles from './HomePage.module.scss'
 
 interface HomePageProps {
     movies: Movie[] | null | 'Not found';
-    pages: number;
-    page: number;
+    totalPages: number;
+    currentPage: number;
     onChange: (event: React.ChangeEvent<unknown>, value: number) => void;
 }
 
 
-const HomePage = ({ movies, pages, page, onChange }: HomePageProps) => {
+const HomePage = ({ movies, totalPages, currentPage, onChange }: HomePageProps) => {
 
     if (movies === "Not found") {
         return (
@@ -33,13 +34,19 @@ const HomePage = ({ movies, pages, page, onChange }: HomePageProps) => {
         return (
             <div className={styles.container}>
                 <div className={styles.wrapper}>
-                    <ul>
-                        {movies.map(movie => (
-                            <li key={movie.filmId || movie.kinopoiskId}><MoviePreview movie={movie} /></li>
-                        ))}
-                    </ul>
+                    <div className={styles.list}>
+                        <ul>
+                            {movies.map(movie => (
+                                <li key={movie.filmId || movie.kinopoiskId}><MoviePreview movie={movie} /></li>
+                            ))}
+                        </ul>
+                    </div>
+                    <Pagination count={totalPages} currentPage={currentPage} onChange={onChange} />
                 </div>
-                <Pagination count={pages} page={page} onChange={onChange} />
+                <div className={styles.arrows}>
+                    <ArrowUp />
+                    <ArrowDown />
+                </div>
             </div>
         )
     }

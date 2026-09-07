@@ -5,28 +5,20 @@ import { useState } from 'react';
 
 interface SearchFormProps {
     setQuery: (event: string) => void;
-    setPage: React.Dispatch<React.SetStateAction<number>>;
+    setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const SearchForm = ({ setQuery, setPage }: SearchFormProps) => {
+const SearchForm = ({ setQuery, setCurrentPage }: SearchFormProps) => {
 
     const [inputValue, setInputValue] = useState(() => {
         return sessionStorage.getItem('query') || '';
     });
 
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-        setQuery(inputValue);
-        setPage(1);
-        sessionStorage.setItem('page', '1');
-        sessionStorage.setItem('query', inputValue);
-    }
-
     const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
         setQuery(inputValue);
-        setPage(1);
-        sessionStorage.setItem('page', '1');
+        setCurrentPage(1);
+        sessionStorage.setItem('currentPage', '1');
         sessionStorage.setItem('query', inputValue);
     };
 
@@ -39,7 +31,7 @@ const SearchForm = ({ setQuery, setPage }: SearchFormProps) => {
                 value={inputValue}
                 onChange={(event) => setInputValue(event.target.value)} />
             <Button
-                onClick={handleClick}
+                type='submit'
                 variant="contained"
             >
                 Search</Button>

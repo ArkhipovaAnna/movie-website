@@ -2,14 +2,14 @@ import MuiButton from '@mui/material/Button';
 
 interface ButtonProps {
     children: string;
-    onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    type: 'submit' | 'reset' | 'button';
     variant?: 'text' | 'contained' | 'outlined';
 }
-const Button = ({ children, variant, onClick }: ButtonProps) => {
+const Button = ({ children, type, variant }: ButtonProps) => {
 
     return (
         <MuiButton
-            onClick={onClick}
+            type={type}
             variant={variant}
             size="small"
             sx={{
