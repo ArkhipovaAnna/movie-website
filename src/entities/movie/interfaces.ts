@@ -13,4 +13,5 @@ export interface Movie {
     posterUrl: string;
     posterUrlPreview: string;
     kinopoiskId?: number;
+    ratingKinopoisk?: number;
 }

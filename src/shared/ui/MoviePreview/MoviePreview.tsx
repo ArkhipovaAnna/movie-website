@@ -1,5 +1,6 @@
-import styles from './MoviePreview.module.scss'
-import type { Movie } from '../../../entities/movie/interfaces'
+import styles from './MoviePreview.module.scss';
+import type { Movie } from '../../../entities/movie/interfaces';
+import Rating from '../Rating/Rating';
 
 interface MoviePreviewProps {
     movie: Movie;
@@ -34,7 +35,7 @@ const MoviePreview = ({ movie }: MoviePreviewProps) => {
         <div className={styles.wrapper}>
             <div className={styles.header}>
                 <h2>{movie.nameRu || movie.nameEn}</h2>
-                <div>Rating</div>
+                <Rating rating={movie.ratingKinopoisk || Number(movie.rating)} />
             </div>
             <div className={styles.content}>
                 <div className={styles.imgWrapper}>
