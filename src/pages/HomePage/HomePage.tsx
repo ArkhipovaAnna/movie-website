@@ -2,31 +2,34 @@
 import type { Movie } from "../../entities/movie/interfaces"
 import { DotLoader } from "react-spinners"
 import Pagination from "../../shared/ui/Pagination/Pagination"
-import { ArrowDown, ArrowUp } from "../../shared/ui/Arrows/Arrows"
+import ArrowUp from "../../shared/ui/Arrows/ArrowUp"
+import ArrowDown from "../../shared/ui/Arrows/ArrowDown"
 import MoviePreview from "../../shared/ui/MoviePreview/MoviePreview"
 import styles from './HomePage.module.scss'
 
 interface HomePageProps {
-    movies: Movie[] | null | 'Not found';
+    movies: Movie[] | 'Not found' | undefined;
     totalPages: number;
     currentPage: number;
+    isLoading: boolean;
     onChange: (event: React.ChangeEvent<unknown>, value: number) => void;
 }
 
 
-const HomePage = ({ movies, totalPages, currentPage, onChange }: HomePageProps) => {
+const HomePage = ({ movies, totalPages, currentPage, isLoading, onChange }: HomePageProps) => {
 
-    if (movies === "Not found") {
+    if (isLoading) {
+        return (
+            <div className={styles.loader}>
+                <DotLoader size={90} color="#fdd510" />
+            </div>
+        )
+    } else if (movies === "Not found") {
+
         return (
             <div className={styles.notFound}>
                 <p>Nothing was found☹️</p>
                 <p>Here is what might interest you...</p>
-            </div>
-        )
-    } else if (movies === null) {
-        return (
-            <div className={styles.loader}>
-                <DotLoader size={90} color="#fdd510" />
             </div>
         )
 
@@ -36,7 +39,7 @@ const HomePage = ({ movies, totalPages, currentPage, onChange }: HomePageProps) 
                 <div className={styles.wrapper}>
                     <div className={styles.list}>
                         <ul>
-                            {movies.map(movie => (
+                            {movies?.map(movie => (
                                 <li key={movie.filmId || movie.kinopoiskId}><MoviePreview movie={movie} /></li>
                             ))}
                         </ul>
