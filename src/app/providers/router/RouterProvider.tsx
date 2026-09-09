@@ -27,12 +27,14 @@ const RouterProvider = () => {
         });
     };
 
-    const { movies, totalPages } = useSearch(query, currentPage);
+    const { movies, totalPages, isLoading, isError } = useSearch(query, currentPage);
+
+    if (isError) console.log('Ошибка при обащении к API');
 
     return (
         <Routes>
             <Route element={<Layout setQuery={setQuery} setCurrentPage={setCurrentPage} />}>
-                <Route path='/' element={<HomePage movies={movies} totalPages={totalPages} currentPage={currentPage} onChange={handleChange} />} />
+                <Route path='/' element={<HomePage movies={movies} totalPages={totalPages} currentPage={currentPage} isLoading={isLoading} onChange={handleChange} />} />
                 <Route path='/details' element={<DetailsPage />} />
             </Route>
             <Route path='*' element={<NotFound />} />

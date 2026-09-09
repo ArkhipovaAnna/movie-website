@@ -1,12 +1,17 @@
 import MuiRating from '@mui/material/Rating';
 
 interface RatingProps {
-    rating: number;
+    rating: number | string;
 }
 
 const Rating = ({ rating }: RatingProps) => {
 
-    const value = Number((rating / 2).toFixed(1));
+    if (rating === 'null') {
+        return <p>Нет оценок</p>;
+    }
+
+    const numberRating = Number(rating);
+    const value = Number((numberRating / 2).toFixed(1));
 
     return (
         <MuiRating

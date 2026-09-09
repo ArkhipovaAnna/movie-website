@@ -35,7 +35,7 @@ const MoviePreview = ({ movie }: MoviePreviewProps) => {
         <div className={styles.wrapper}>
             <div className={styles.header}>
                 <h2>{movie.nameRu || movie.nameEn}</h2>
-                <Rating rating={movie.ratingKinopoisk || Number(movie.rating)} />
+                <Rating rating={movie.ratingKinopoisk || movie.rating} />
             </div>
             <div className={styles.content}>
                 <div className={styles.imgWrapper}>
@@ -43,7 +43,7 @@ const MoviePreview = ({ movie }: MoviePreviewProps) => {
                 </div>
                 <div className={styles.information}>
                     <p><span>Год выпуска: </span> {movie.year === 'null' ? 'Неизвестно' : movie.year}</p>
-                    <p><span>Страна: </span>{countries}</p>
+                    <p><span>Страна: </span>{countries || 'Неизвестно'}</p>
                     <p className={styles.genres}><span>Жанр: </span>{genres.length > 0 ? genres : 'Неизвестно'}</p>
                     <p ><span>Продолжительность: </span>{filmLength}</p>
                     <p className={styles.description}>{movie.description}</p>
