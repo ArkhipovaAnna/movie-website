@@ -1,135 +1,7 @@
-// import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import type { Movie } from '../../entities/movie/interfaces';
-
-//ПЕРВЫЙ ВАРИАНТ
-
-// const useSearch = (query: string, currentPage: number) => {
-
-//     const [movies, setMovies] = useState<Movie[] | null | 'Not found'>(null);
-//     const [totalPages, setTotalPages] = useState(1);
-
-//     useEffect(() => {
-
-//         setMovies(null);
-
-//         if (!query.trim()) {
-//             fetch(`https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_POPULAR_ALL&page=${currentPage}`, {
-//                 method: 'GET',
-//                 headers: {
-//                     'X-API-KEY': 'b0aea1f2-8488-4e2f-bfe8-6c9aeb54d98f',
-//                     'Content-Type': 'application/json',
-//                 },
-//             })
-//                 .then(response => {
-//                     if (!response.ok) throw new Error('Bad Request');
-//                     return response.json();
-//                 })
-//                 .then(json => {
-
-//                     const data = json.items;
-
-//                     if (data && data.length > 0) {
-//                         setMovies(data);
-//                         setTotalPages(json.totalPages || 1);
-//                     } else {
-//                         setMovies('Not found');
-//                         setTotalPages(1);
-//                     }
-//                 })
-//                 .catch(error => {
-//                     console.error(error.message);
-//                     setMovies('Not found');
-//                 });
-
-//             return;
-//         }
-
-//         const cleanTitle = encodeURIComponent(query.trim());
-
-//         fetch(`https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${cleanTitle}&page=${currentPage}`, {
-//             method: 'GET',
-//             headers: {
-//                 'X-API-KEY': 'b0aea1f2-8488-4e2f-bfe8-6c9aeb54d98f',
-//                 'Content-Type': 'application/json',
-//             },
-//         })
-//             .then(response => {
-//                 if (!response.ok) throw new Error('Bad Request');
-//                 return response.json();
-//             })
-//             .then(json => {
-
-//                 if (!json.films || json.films.length === 0) {
-//                     setMovies('Not found');
-//                     setTotalPages(1);
-//                     return;
-//                 }
-
-//                 const filteredFilms = json.films.filter((film: Movie) => film.posterUrl !== 'https://kinopoiskapiunofficial.tech/images/posters/kp/no-poster.png');
-
-//                 let numberPages = Math.ceil(json.searchFilmsCountResult / 20);
-//                 if (numberPages > 20) numberPages = 20;
-
-//                 if (filteredFilms.length === 0) {
-//                     setMovies('Not found');
-//                     setTotalPages(1);
-//                 } else {
-//                     setMovies(filteredFilms);
-//                     setTotalPages(numberPages || 1);
-//                 }
-//             })
-//             .catch(error => {
-//                 console.error(error.message);
-//                 setMovies('Not found');
-//                 setTotalPages(1);
-//             });
-
-//     }, [query, currentPage]);
-
-//     return { movies, totalPages };
-// }
-
-// ВТОРОЙ ВАРИАНТ
-
-// const useSearch = (query: string, currentPage: number) => {
-
-//     return useQuery({
-
-//         queryKey: ['films', { query, currentPage }],
-
-//         queryFn: async () => {
-
-//             let url = '';
-
-//             if (!query.trim()) {
-//                 url = `https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_POPULAR_ALL&page=${currentPage}`
-//             } else {
-//                 const cleanTitle = encodeURIComponent(query.trim());
-//                 url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${cleanTitle}&page=${currentPage}`
-//             }
-
-//             const res = await fetch(url, {
-//                 method: 'GET',
-//                 headers: {
-//                     'X-API-KEY': key,
-//                     'Content-Type': 'application/json',
-//                 },
-//             });
-
-//             if (!res.ok) throw new Error('Network error');
-
-//             return res.json;
-//         },
-
-//         staleTime: 1000 * 60 * 5,
-
-//     })
-// }
-
-// export default useSearch;
-
-// ТРЕТИЙ ВАРИАНТ 
+import { useRequest } from '../../app/stores/use-request-store';
+import { useCurrentPage } from '../../app/stores/use-currentPage-store';
 
 interface UseSearchReturn {
     movies: Movie[] | 'Not found' | undefined;
@@ -140,12 +12,17 @@ interface UseSearchReturn {
 
 const key = import.meta.env.VITE_KINOPOISK_KEY;
 
-const useSearch = (query: string, currentPage: number): UseSearchReturn => {
-    const trimmedQuery = query.trim();
+const useSearch = (): UseSearchReturn => {
+
+    const request = useRequest();
+    const currentPage = useCurrentPage();
+
+
+    const trimmedRequest = request.trim();
 
     const { data, isLoading, isError } = useQuery({
 
-        queryKey: ['movies', { query: trimmedQuery, page: currentPage }],
+        queryKey: ['movies', { request: trimmedRequest, page: currentPage }],
 
         queryFn: async () => {
             const headers = {
@@ -154,7 +31,7 @@ const useSearch = (query: string, currentPage: number): UseSearchReturn => {
             };
 
 
-            if (!trimmedQuery) {
+            if (!trimmedRequest) {
                 const res = await fetch(
                     `https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_POPULAR_ALL&page=${currentPage}`,
                     { method: 'GET', headers }
@@ -174,7 +51,7 @@ const useSearch = (query: string, currentPage: number): UseSearchReturn => {
             }
 
 
-            const cleanTitle = encodeURIComponent(trimmedQuery);
+            const cleanTitle = encodeURIComponent(trimmedRequest);
             const res = await fetch(
                 `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${cleanTitle}&page=${currentPage}`,
                 { method: 'GET', headers }

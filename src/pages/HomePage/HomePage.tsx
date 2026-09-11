@@ -5,18 +5,12 @@ import Pagination from "../../shared/ui/Pagination/Pagination"
 import ArrowUp from "../../shared/ui/Arrows/ArrowUp"
 import ArrowDown from "../../shared/ui/Arrows/ArrowDown"
 import MoviePreview from "../../shared/ui/MoviePreview/MoviePreview"
+import useSearch from "../../features/search/useSearch"
 import styles from './HomePage.module.scss'
 
-interface HomePageProps {
-    movies: Movie[] | 'Not found' | undefined;
-    totalPages: number;
-    currentPage: number;
-    isLoading: boolean;
-    onChange: (event: React.ChangeEvent<unknown>, value: number) => void;
-}
+const HomePage = () => {
 
-
-const HomePage = ({ movies, totalPages, currentPage, isLoading, onChange }: HomePageProps) => {
+    const { movies, totalPages, isLoading } = useSearch();
 
     if (isLoading) {
         return (
@@ -44,7 +38,7 @@ const HomePage = ({ movies, totalPages, currentPage, isLoading, onChange }: Home
                             ))}
                         </ul>
                     </div>
-                    <Pagination count={totalPages} currentPage={currentPage} onChange={onChange} />
+                    <Pagination count={totalPages} />
                 </div>
                 <div className={styles.arrows}>
                     <ArrowUp />

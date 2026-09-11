@@ -1,17 +1,30 @@
-import MuiPagination from '@mui/material/Pagination'
+import MuiPagination from '@mui/material/Pagination';
+import { useCurrentPage, handleSetCurrentPage } from '../../../app/stores/use-currentPage-store';
+
 
 interface PaginationProps {
     count: number;
-    currentPage: number;
-    onChange: (event: React.ChangeEvent<unknown>, value: number) => void;
 }
 
-const Pagination = ({ count, currentPage, onChange }: PaginationProps) => {
+const Pagination = ({ count }: PaginationProps) => {
+
+    const currentPage = useCurrentPage();
+    const setCurrentPage = handleSetCurrentPage();
+
+    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        setCurrentPage(value);
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+        });
+    };
+
     return (
         <MuiPagination
             count={count}
             page={currentPage}
-            onChange={onChange}
+            onChange={handleChange}
             variant="outlined"
             color="primary"
             size="large"

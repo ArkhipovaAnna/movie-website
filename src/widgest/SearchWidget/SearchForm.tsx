@@ -2,13 +2,14 @@ import Field from "../../shared/ui/Field/Field";
 import Button from "../../shared/ui/Button/Button";
 import styles from './SearchForm.module.scss';
 import { useState } from 'react';
+import { handleSetRequest } from "../../app/stores/use-request-store";
+import { handleSetCurrentPage } from "../../app/stores/use-currentPage-store";
 
-interface SearchFormProps {
-    setQuery: (event: string) => void;
-    setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
-}
 
-const SearchForm = ({ setQuery, setCurrentPage }: SearchFormProps) => {
+const SearchForm = () => {
+
+    const setRequest = handleSetRequest();
+    const setCurrentPage = handleSetCurrentPage();
 
     const [inputValue, setInputValue] = useState(() => {
         return sessionStorage.getItem('query') || '';
@@ -16,9 +17,8 @@ const SearchForm = ({ setQuery, setCurrentPage }: SearchFormProps) => {
 
     const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
-        setQuery(inputValue);
+        setRequest(inputValue);
         setCurrentPage(1);
-        sessionStorage.setItem('currentPage', '1');
         sessionStorage.setItem('query', inputValue);
     };
 
