@@ -1,6 +1,7 @@
 import styles from './MoviePreview.module.scss';
 import type { Movie } from '../../../entities/movie/interfaces';
 import Rating from '../Rating/Rating';
+import filmLengthFormatted from '../../helpers/filmLengthFormatted';
 
 interface MoviePreviewProps {
     movie: Movie;
@@ -12,22 +13,7 @@ const MoviePreview = ({ movie }: MoviePreviewProps) => {
 
     const genres = movie.genres.map(item => item.genre).join('/ ');
 
-    let filmLength = movie.filmLength;
-    if (filmLength === undefined) {
-        filmLength = 'Неизвестно'
-    } else {
-        const filmLengthArray = filmLength.split(':');
-        let hours = filmLengthArray[0];
-        if (hours.startsWith('0')) hours = hours.slice(1);
-        let minutes = filmLengthArray[1];
-        if (minutes.startsWith('0')) minutes = minutes.slice(1);
-        if (hours === '0') {
-            filmLength = `${minutes} мин`
-        } else {
-            filmLength = `${hours} ч ${minutes} мин`
-        }
-
-    }
+    const filmLength = filmLengthFormatted(movie.filmLength);
 
     const isNoPosterPreview = movie.posterUrlPreview === 'https://kinopoiskapiunofficial.tech/images/posters/kp/no-poster.png';
 

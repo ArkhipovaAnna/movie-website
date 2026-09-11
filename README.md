@@ -1,2 +1,1 @@
-- сохранить поисковый запрос в local storage
-- добавить поддержку разных языков 
+A movie information search application built with TypeScript, React Router, MUI, and TanStack Query.
