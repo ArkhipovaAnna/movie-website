@@ -12,13 +12,13 @@ const InfoResult = ({ data }: SearchResultProps) => {
             <h1>{data.nameRu}</h1>
             <p>{data.description}</p>
             <img src='/images/stars.svg' alt='Rating'></img>
-            <Button onClick={(event) => event.preventDefault()}>Read more</Button>
+            {/* <Button onClick={(event) => event.preventDefault()}>Read more</Button>
             <Button
                 onClick={(event) => event.preventDefault()}
-            // className={styles.specialButton}
+            className={styles.specialButton}
             >
                 Trailer
-            </Button>
+            </Button> */}
         </div>
     )
 }

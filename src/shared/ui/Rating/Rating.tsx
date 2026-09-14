@@ -20,8 +20,11 @@ const Rating = ({ rating }: RatingProps) => {
             readOnly
             sx={{
                 alignSelf: 'flex-end',
+                '& .MuiRating-icon': {
+                    color: 'white',
+                },
                 '& .MuiRating-iconFilled svg': {
-                    fill: '#ffb703 !important',
+                    fill: '#ffb703',
                 },
             }}
         />

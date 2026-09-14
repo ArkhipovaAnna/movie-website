@@ -1,5 +1,4 @@
 // import { Link } from "react-router"
-import type { Movie } from "../../entities/movie/interfaces"
 import { DotLoader } from "react-spinners"
 import Pagination from "../../shared/ui/Pagination/Pagination"
 import ArrowUp from "../../shared/ui/Arrows/ArrowUp"
