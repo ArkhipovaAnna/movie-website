@@ -40,17 +40,3 @@
     border-radius: 5px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
 }
-
-.genres {
-    text-transform: capitalize;
-}
-
-.description {
-    margin-top: 30px;
-    font-weight: 400;
-    color: #cbcbcb;
-    display: -webkit-box;
-    -webkit-line-clamp: 10;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}

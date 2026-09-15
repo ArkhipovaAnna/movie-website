@@ -1,16 +1,17 @@
-.wrapper {
-    width: 40vw;
+.header {
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: space-between;
 }
 
-.wrapper h1 {
-    margin-bottom: 30px;
+.wrapper h2 {
     line-height: 1;
     font-weight: bold;
-    font-size: 90px;
+    font-size: 50px;
 }
 
 .wrapper p {
-    margin-bottom: 23px;
+    margin-bottom: 7px;
     font-weight: light;
     font-size: 18px;
 }
@@ -18,13 +19,4 @@
 .wrapper img {
     display: block;
     margin-bottom: 37px;
-}
-
-.specialButton {
-    width: 0;
-    height: 0;
-    margin-left: 41px;
-    background: none;
-    text-decoration: underline;
-    color: white;
 }

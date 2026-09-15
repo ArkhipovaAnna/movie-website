@@ -3,7 +3,7 @@ import type { Movie } from '../../entities/movie/interfaces';
 import { useRequest } from '../../app/stores/use-request-store';
 import { useCurrentPage } from '../../app/stores/use-currentPage-store';
 
-interface UseSearchReturn {
+interface UseSearchFilmsReturn {
     movies: Movie[] | 'Not found' | undefined;
     totalPages: number;
     isLoading: boolean;
@@ -12,7 +12,7 @@ interface UseSearchReturn {
 
 const key = import.meta.env.VITE_KINOPOISK_KEY;
 
-const useSearch = (): UseSearchReturn => {
+const useSearchFilms = (): UseSearchFilmsReturn => {
 
     const request = useRequest();
     const currentPage = useCurrentPage();
@@ -38,7 +38,7 @@ const useSearch = (): UseSearchReturn => {
                 );
                 if (!res.ok) throw new Error('Bad Request');
                 const json = await res.json();
-
+                console.log(json);
 
                 if (!json.items || json.items.length === 0) {
                     return { movies: 'Not found' as const, totalPages: 1 };
@@ -58,7 +58,6 @@ const useSearch = (): UseSearchReturn => {
             );
             if (!res.ok) throw new Error('Bad Request');
             const json = await res.json();
-
 
             if (!json.films || json.films.length === 0) {
                 return { movies: 'Not found' as const, totalPages: 1 };
@@ -100,4 +99,4 @@ const useSearch = (): UseSearchReturn => {
     };
 };
 
-export default useSearch;
+export default useSearchFilms;

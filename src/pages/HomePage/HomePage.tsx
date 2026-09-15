@@ -1,21 +1,18 @@
-// import { Link } from "react-router"
-import { DotLoader } from "react-spinners"
-import Pagination from "../../shared/ui/Pagination/Pagination"
-import ArrowUp from "../../shared/ui/Arrows/ArrowUp"
-import ArrowDown from "../../shared/ui/Arrows/ArrowDown"
-import MoviePreview from "../../shared/ui/MoviePreview/MoviePreview"
-import useSearch from "../../features/search/useSearch"
-import styles from './HomePage.module.scss'
+import Pagination from "../../shared/ui/Pagination/Pagination";
+import ArrowUp from "../../shared/ui/Arrows/ArrowUp";
+import ArrowDown from "../../shared/ui/Arrows/ArrowDown";
+import MoviePreview from "../../shared/ui/MoviePreview/MoviePreview";
+import useSearchFilms from "../../features/search/useSearchFilms";
+import Loader from "../../shared/ui/Loader/Loader";
+import styles from './HomePage.module.scss';
 
 const HomePage = () => {
 
-    const { movies, totalPages, isLoading } = useSearch();
+    const { movies, totalPages, isLoading } = useSearchFilms();
 
     if (isLoading) {
         return (
-            <div className={styles.loader}>
-                <DotLoader size={90} color="#fdd510" />
-            </div>
+            <Loader />
         )
     } else if (movies === "Not found") {
 

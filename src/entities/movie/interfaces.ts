@@ -15,3 +15,51 @@ export interface Movie {
     kinopoiskId?: number;
     ratingKinopoisk?: number;
 }
+
+export interface Details {
+    completed: boolean;
+    countries: Record<string, string>[];
+    coverUrl: string | null;
+    description: string;
+    editorAnnotation: string | null;
+    endYear: number | null;
+    filmLength: number;
+    genres: Record<string, string>[];
+    has3D: boolean;
+    hasImax: boolean;
+    imdbId: string;
+    isTicketsAvailable: boolean;
+    kinopoiskHDId: string | null;
+    kinopoiskId: number;
+    lastSync: string;
+    logoUrl: string | null;
+    nameEn: string | null;
+    nameOriginal: string | null;
+    nameRu: string;
+    posterUrl: string;
+    posterUrlPreview: string;
+    productionStatus: string | null;
+    ratingAgeLimits: string;
+    ratingAwait: number | null;
+    ratingAwaitCount: number;
+    ratingFilmCritics: number | null;
+    ratingFilmCriticsVoteCount: number;
+    ratingGoodReview: number;
+    ratingGoodReviewVoteCount: number;
+    ratingImdb: number;
+    ratingImdbVoteCount: number;
+    ratingKinopoisk: number;
+    ratingKinopoiskVoteCount: number;
+    ratingMpaa: string | null;
+    ratingRfCritics: number;
+    ratingRfCriticsVoteCount: number;
+    reviewsCount: number;
+    serial: boolean;
+    shortDescription: string | null;
+    shortFilm: boolean;
+    slogan: string;
+    startYear: number | null;
+    type: string;
+    webUrl: string;
+    year: number;
+}

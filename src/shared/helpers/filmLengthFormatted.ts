@@ -1,23 +1,29 @@
-const filmLengthFormatted = (filmLength: string) => {
+const filmLengthFormatted = (filmLength: string | number) => {
 
-    if (filmLength === undefined) {
+    let hours = 0;
+    let minutes = 0;
 
-        return 'Неизвестно';
+    if (typeof filmLength === 'number') {
+
+        hours = Math.floor(filmLength / 60);
+        minutes = filmLength % 60;
+
+    } else if (typeof filmLength === 'string' && filmLength.includes(':')) {
+
+        const parts = filmLength.split(':');
+        hours = Number(parts[0]);
+        minutes = Number(parts[1]);
 
     } else {
-
-        const filmLengthArray = filmLength.split(':');
-        let hours = filmLengthArray[0];
-        if (hours.startsWith('0')) hours = hours.slice(1);
-        let minutes = filmLengthArray[1];
-        if (minutes.startsWith('0')) minutes = minutes.slice(1);
-        if (hours === '0') {
-            return `${minutes} мин`;
-        } else {
-            return `${hours} ч ${minutes} мин`;
-        }
-
+        return 'Неизвестно';
     }
+
+    if (hours === 0) {
+        return `${minutes} мин`
+    }
+
+    return `${hours} ч ${minutes} мин`;
 }
 
 export default filmLengthFormatted
+

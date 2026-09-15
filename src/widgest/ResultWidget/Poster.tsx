@@ -1,10 +1,9 @@
 import styles from './Poster.module.scss';
-import type { Movie } from "../../entities/movie/interfaces";
+import type { Details } from "../../entities/movie/interfaces";
 
 interface SearchResultProps {
-    data: Movie | null;
+    data: Details;
 }
-
 
 const Poster = ({ data }: SearchResultProps) => {
 

@@ -1,0 +1,13 @@
+.genres {
+    text-transform: capitalize;
+}
+
+.description {
+    margin-top: 30px;
+    font-weight: 400;
+    color: #cbcbcb;
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
