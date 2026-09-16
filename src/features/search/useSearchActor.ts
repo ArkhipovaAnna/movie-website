@@ -1,19 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
-import type { Staff } from "../../entities/movie/interfaces";
+import type { Actor } from "../../entities/movie/interfaces";
 
-interface UseSearchStaffReturn {
-    data: Staff[];
+interface UseSearchActorReturn {
+    data: Actor;
     isLoading: boolean;
     isError: boolean;
 }
 
 const key = import.meta.env.VITE_KINOPOISK_KEY;
 
-const useSearchStaff = (id: number): UseSearchStaffReturn => {
+const useSearchActor = (id: number): UseSearchActorReturn => {
 
     const { data, isLoading, isError } = useQuery({
 
-        queryKey: ['staff', { id: id }],
+        queryKey: ['actor', { id: id }],
 
         queryFn: async () => {
             const headers = {
@@ -22,17 +22,14 @@ const useSearchStaff = (id: number): UseSearchStaffReturn => {
             };
 
             const res = await fetch(
-                `https://kinopoiskapiunofficial.tech/api/v1/staff?filmId=${id}`,
+                `https://kinopoiskapiunofficial.tech/api/v1/staff/${id}`,
                 { method: 'GET', headers }
             );
             if (!res.ok) throw new Error('Bad Request');
 
             const json = await res.json();
-            const actors = json
-                .filter((person: Staff) => person.professionKey === 'ACTOR')
-                .slice(0, 15);
 
-            return actors;
+            return json;
         },
 
         staleTime: 1000 * 60 * 5,
@@ -45,4 +42,4 @@ const useSearchStaff = (id: number): UseSearchStaffReturn => {
     };
 };
 
-export default useSearchStaff
+export default useSearchActor

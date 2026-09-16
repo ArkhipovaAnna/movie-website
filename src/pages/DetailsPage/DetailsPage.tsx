@@ -1,8 +1,9 @@
 import { useParams } from "react-router";
 import useSearchDetails from "../../features/search/useSearchDetails";
-import Loader from "../../shared/ui/Loader/Loader";
 import InfoResult from "../../widgest/ResultWidget/InfoResult";
 import Poster from "../../widgest/ResultWidget/Poster";
+import Staff from "../../widgest/ResultWidget/Staff";
+import ContentWrapper from "../../shared/ui/ContentWrapper/ContentWrapper";
 import styles from './DetailsPage.module.scss';
 
 const DetailsPage = () => {
@@ -13,22 +14,17 @@ const DetailsPage = () => {
 
     const { data, isLoading, isError } = useSearchDetails(Number(id));
 
-    if (isLoading) {
-        return (
-            <Loader />
-        )
-    } else if (isError) {
+    const status =
+        isLoading ? 'loading' :
+            isError ? 'fail' :
+                'success';
 
-        return (
-            <h2>Что-то пошло не так🤔</h2>
-        )
-
-    } else {
-
-        return (
+    return (
+        <ContentWrapper status={status}>
             <div className={styles.wrapper}>
-                <Poster data={data} />
+                <Poster url={data?.posterUrl} />
                 <InfoResult data={data} />
+                <Staff id={data?.kinopoiskId} />
                 <div style={{
                     gridColumn: '1 / -1',
                     height: 100,
@@ -39,10 +35,8 @@ const DetailsPage = () => {
                     Trailer
                 </div>
             </div>
-        )
-
-    }
-
+        </ContentWrapper>
+    )
 }
 
 export default DetailsPage

@@ -1,14 +1,10 @@
 .container {
-    margin: 50px 0 100px;
     display: grid;
     grid-template-columns: 1fr max-content 1fr;
     align-items: center;
 }
 
 .wrapper {
-    width: 70vw;
-    grid-column: 2;
-
     display: flex;
     flex-direction: column;
     row-gap: 30px;
@@ -17,7 +13,7 @@
 
 .list {
     width: 100%;
-    background-color: #28282b;
+    background-color: var(--color-background);
     border: 2px solid black;
     border-bottom: none;
 }
@@ -34,13 +30,20 @@
     position: relative;
 }
 
-.notFound {
-    margin-top: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    row-gap: 10px;
-    text-align: center;
-    font-size: 24px;
-}
+// .notFound {
+//     margin-top: 50px;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     row-gap: 10px;
+//     text-align: center;
+//     font-size: 24px;
+// }
+
+// .loader {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     height: 80vh;
+// }

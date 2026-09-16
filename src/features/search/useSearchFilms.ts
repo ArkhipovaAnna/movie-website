@@ -4,7 +4,7 @@ import { useRequest } from '../../app/stores/use-request-store';
 import { useCurrentPage } from '../../app/stores/use-currentPage-store';
 
 interface UseSearchFilmsReturn {
-    movies: Movie[] | 'Not found' | undefined;
+    movies: Movie[] | null;
     totalPages: number;
     isLoading: boolean;
     isError: boolean;
@@ -38,10 +38,9 @@ const useSearchFilms = (): UseSearchFilmsReturn => {
                 );
                 if (!res.ok) throw new Error('Bad Request');
                 const json = await res.json();
-                console.log(json);
 
                 if (!json.items || json.items.length === 0) {
-                    return { movies: 'Not found' as const, totalPages: 1 };
+                    return { movies: null, totalPages: 1 };
                 }
 
                 return {
@@ -60,7 +59,7 @@ const useSearchFilms = (): UseSearchFilmsReturn => {
             const json = await res.json();
 
             if (!json.films || json.films.length === 0) {
-                return { movies: 'Not found' as const, totalPages: 1 };
+                return { movies: null, totalPages: 1 };
             }
 
 
@@ -69,7 +68,7 @@ const useSearchFilms = (): UseSearchFilmsReturn => {
             );
 
             if (filteredFilms.length === 0) {
-                return { movies: 'Not found' as const, totalPages: 1 };
+                return { movies: null, totalPages: 1 };
             }
 
 
@@ -87,7 +86,7 @@ const useSearchFilms = (): UseSearchFilmsReturn => {
 
 
     if (isError) {
-        return { movies: 'Not found', totalPages: 1, isLoading, isError };
+        return { movies: null, totalPages: 1, isLoading, isError };
     }
 
 

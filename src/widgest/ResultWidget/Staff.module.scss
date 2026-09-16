@@ -1,0 +1,39 @@
+.wrapper {
+    grid-column: 1 / -1;
+    overflow-x: scroll;
+    border-radius: 5px;
+    background-color: #202023;
+}
+
+.wrapper h4 {
+    font-weight: 400;
+    font-size: 20px;
+    margin: 10px 15px;
+}
+
+.list {
+    display: flex;
+}
+
+/* Стили скроллбара (без стрелок) */
+
+/* Высота скроллбара */
+::-webkit-scrollbar {
+    height: 8px;
+}
+
+/* Дорожка */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Вид бегунка */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+/* Наведение на бегунок */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

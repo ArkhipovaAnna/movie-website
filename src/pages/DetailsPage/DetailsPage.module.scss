@@ -1,14 +1,12 @@
 .wrapper {
-    width: 70vw;
-    margin: 50px auto 100px;
     padding: 20px;
 
     display: grid;
     grid-template-columns: max-content 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto;
     gap: 30px;
 
-    background-color: #2d2d30;
+    background-color: var(--color-background);
     border: 1px solid black;
     color: #eceff1;
 }

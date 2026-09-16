@@ -1,0 +1,22 @@
+.wrapper {
+    padding: 20px;
+    background-color: var(--color-background);
+    border: 1px solid black;
+    color: #eceff1;
+}
+
+.flexbox {
+    display: flex;
+    column-gap: 30px;
+}
+
+.photo {
+    width: 12vw;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+}
+
+.information {
+    border: 1px solid orange;
+    width: 100%;
+}

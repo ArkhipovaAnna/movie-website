@@ -63,3 +63,55 @@ export interface Details {
     webUrl: string;
     year: number;
 }
+
+export interface Staff {
+    description: string;
+    nameEn: string;
+    nameRu: string;
+    posterUrl: string;
+    professionKey: string;
+    professionText: string;
+    staffId: number;
+}
+
+export interface Actor {
+    age: number;
+    birthday: string;
+    birthplace: string;
+    death: string | null;
+    deathplace: string | null;
+    facts: string[];
+    films: Filmography[];
+    growth: number;
+    hasAwards: number;
+    nameEn: string;
+    nameRu: string;
+    personId: number;
+    posterUrl: string;
+    profession: string;
+    sex: string;
+    spouses: Spouses[];
+    webUrl: string;
+}
+
+interface Filmography {
+    description: string;
+    filmId: number;
+    general: boolean;
+    nameEn: string;
+    nameRu: string;
+    professionKey: string;
+    rating: string;
+    year: string;
+}
+
+interface Spouses {
+    children: number;
+    divorced: boolean;
+    divorcedReason: string;
+    name: string;
+    personId: number;
+    relation: string;
+    sex: string;
+    webUrl: string;
+}
