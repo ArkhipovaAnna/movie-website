@@ -1,0 +1,16 @@
+.card {
+    width: 110px;
+    margin: 8px;
+}
+
+.cardMedia {
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+}
+
+.name {
+    font-family: Tahoma;
+    color: var(--color-light-gray);
+    font-size: 0.8rem;
+    text-align: center;
+}

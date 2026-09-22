@@ -81,7 +81,7 @@ export interface Actor {
     death: string | null;
     deathplace: string | null;
     facts: string[];
-    films: Filmography[];
+    films: FilmographyItem[];
     growth: number;
     hasAwards: number;
     nameEn: string;
@@ -94,7 +94,7 @@ export interface Actor {
     webUrl: string;
 }
 
-interface Filmography {
+export interface FilmographyItem {
     description: string;
     filmId: number;
     general: boolean;

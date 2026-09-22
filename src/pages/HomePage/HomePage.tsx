@@ -1,6 +1,4 @@
 import Pagination from "../../shared/ui/Pagination/Pagination";
-import ArrowUp from "../../shared/ui/Arrows/ArrowUp";
-import ArrowDown from "../../shared/ui/Arrows/ArrowDown";
 import MoviePreview from "../../shared/ui/MoviePreview/MoviePreview";
 import useSearchFilms from "../../features/search/useSearchFilms";
 import ContentWrapper from "../../shared/ui/ContentWrapper/ContentWrapper";
@@ -16,26 +14,20 @@ const HomePage = () => {
                 'success';
 
     return (
-        <div className={styles.container}>
-            <ContentWrapper status={status} style={{ gridColumn: 2 }}>
-                <div className={styles.wrapper}>
-                    <div className={styles.list}>
-                        <ul>
-                            {movies?.map(movie => (
-                                <li key={movie.filmId || movie.kinopoiskId}>
-                                    <MoviePreview movie={movie} />
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    <Pagination count={totalPages} />
+        <ContentWrapper status={status}>
+            <div className={styles.wrapper}>
+                <div className={styles.list}>
+                    <ul>
+                        {movies?.map(movie => (
+                            <li key={movie.filmId || movie.kinopoiskId}>
+                                <MoviePreview movie={movie} />
+                            </li>
+                        ))}
+                    </ul>
                 </div>
-            </ContentWrapper>
-            <div className={styles.arrows}>
-                <ArrowUp />
-                <ArrowDown />
+                <Pagination count={totalPages} />
             </div>
-        </div>
+        </ContentWrapper>
     )
 }
 

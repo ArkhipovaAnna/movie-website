@@ -17,7 +17,7 @@ const Staff = ({ id }: StaffProps) => {
             <ul className={styles.list}>
                 {data?.map(person => (
                     <li key={person.staffId}>
-                        <Link to={`/staff/${person.staffId}`}>
+                        <Link to={`/staff/${person.staffId}`} style={{ textDecoration: 'none' }}>
                             <ActorCard person={person} />
                         </Link>
                     </li>

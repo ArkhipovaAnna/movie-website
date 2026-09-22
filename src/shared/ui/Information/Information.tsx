@@ -16,10 +16,16 @@ const Information = ({ movie }: InformationProps) => {
 
     return (
         <div>
-            <p><span>Год выпуска: </span> {movie.year === 'null' ? 'Неизвестно' : movie.year}</p>
-            <p><span>Страна: </span>{countries || 'Неизвестно'}</p>
-            <p className={styles.genres}><span>Жанр: </span>{genres.length > 0 ? genres : 'Неизвестно'}</p>
-            <p ><span>Продолжительность: </span>{filmLength}</p>
+            <dl className={styles.descriptionList}>
+                <dt>Год выпуска</dt>
+                <dd>{movie.year === 'null' ? 'Неизвестно' : movie.year}</dd>
+                <dt>Страна</dt>
+                <dd>{countries || 'Неизвестно'}</dd>
+                <dt>Жанр</dt>
+                <dd style={{ textTransform: 'capitalize' }}>{genres.length > 0 ? genres : 'Неизвестно'}</dd>
+                <dt>Продолжительность</dt>
+                <dd>{filmLength}</dd>
+            </dl>
             <p className={styles.description}>{movie.description}</p>
         </div>
     )

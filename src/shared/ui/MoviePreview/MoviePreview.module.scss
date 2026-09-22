@@ -1,6 +1,8 @@
 .wrapper {
-    border-bottom: 2px solid black;
+    margin: 15px 0;
     padding: 15px 15px 30px 30px;
+    border-radius: 5px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
 }
 
 .wrapper h2 {
@@ -14,7 +16,7 @@
 
 .link {
     text-decoration: none;
-    color: white;
+    color: var(--color-light-gray);
 
     &:hover {
         color: orange;
@@ -25,7 +27,6 @@
     display: flex;
     column-gap: 30px;
     margin-top: 15px;
-    color: white;
 }
 
 .imgWrapper {

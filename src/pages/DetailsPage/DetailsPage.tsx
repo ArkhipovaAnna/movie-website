@@ -19,6 +19,8 @@ const DetailsPage = () => {
             isError ? 'fail' :
                 'success';
 
+    console.log(data);
+
     return (
         <ContentWrapper status={status}>
             <div className={styles.wrapper}>
