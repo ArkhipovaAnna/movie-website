@@ -4,15 +4,18 @@ import IconButton from '@mui/material/IconButton';
 
 const ArrowDown = () => {
 
-    const [isScrollBottom, setIsScrollBottom] = useState(false);
+    const [isScrollBottom, setIsScrollBottom] = useState(true);
 
     useEffect(() => {
 
         const handleScrollBottom = () => {
 
             const scrollTop = window.scrollY || window.pageYOffset;
+            const scrollHeight = document.documentElement.scrollHeight;
 
-            if (scrollTop + window.innerHeight >= document.documentElement.scrollHeight - 15) {
+            const hasVerticalScroll = scrollHeight > window.innerHeight;
+
+            if (!hasVerticalScroll || (scrollTop + window.innerHeight >= scrollHeight - 15)) {
                 setIsScrollBottom(true)
             } else {
                 setIsScrollBottom(false)
