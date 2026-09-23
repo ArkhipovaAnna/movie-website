@@ -3,8 +3,8 @@ import type { Movie } from '../../entities/movie/interfaces';
 import { useRequest } from '../../app/stores/use-request-store';
 import { useCurrentPage } from '../../app/stores/use-currentPage-store';
 
-interface UseSearchReturn {
-    movies: Movie[] | 'Not found' | undefined;
+interface UseSearchFilmsReturn {
+    movies: Movie[] | null;
     totalPages: number;
     isLoading: boolean;
     isError: boolean;
@@ -12,7 +12,7 @@ interface UseSearchReturn {
 
 const key = import.meta.env.VITE_KINOPOISK_KEY;
 
-const useSearch = (): UseSearchReturn => {
+const useSearchFilms = (): UseSearchFilmsReturn => {
 
     const request = useRequest();
     const currentPage = useCurrentPage();
@@ -39,9 +39,8 @@ const useSearch = (): UseSearchReturn => {
                 if (!res.ok) throw new Error('Bad Request');
                 const json = await res.json();
 
-
                 if (!json.items || json.items.length === 0) {
-                    return { movies: 'Not found' as const, totalPages: 1 };
+                    return { movies: null, totalPages: 1 };
                 }
 
                 return {
@@ -60,19 +59,14 @@ const useSearch = (): UseSearchReturn => {
             const json = await res.json();
 
 
-            if (!json.films || json.films.length === 0) {
-                return { movies: 'Not found' as const, totalPages: 1 };
+            if (!json.films) {
+                return { movies: null, totalPages: 1 };
             }
 
 
             const filteredFilms = json.films.filter(
                 (film: Movie) => film.posterUrl !== 'https://kinopoiskapiunofficial.tech/images/posters/kp/no-poster.png'
             );
-
-            if (filteredFilms.length === 0) {
-                return { movies: 'Not found' as const, totalPages: 1 };
-            }
-
 
             let numberPages = Math.ceil(json.searchFilmsCountResult / 20);
             if (numberPages > 20) numberPages = 20;
@@ -88,7 +82,7 @@ const useSearch = (): UseSearchReturn => {
 
 
     if (isError) {
-        return { movies: 'Not found', totalPages: 1, isLoading, isError };
+        return { movies: null, totalPages: 1, isLoading, isError };
     }
 
 
@@ -100,4 +94,4 @@ const useSearch = (): UseSearchReturn => {
     };
 };
 
-export default useSearch;
+export default useSearchFilms;

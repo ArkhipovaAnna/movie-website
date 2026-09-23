@@ -9,21 +9,21 @@ interface IActions {
     setRequest: (request: IInitialState['request']) => void;
 }
 
-interface IQueryState extends IInitialState, IActions { }
+interface IRequestState extends IInitialState, IActions { }
 
 const initialState: IInitialState = {
     request: ''
 };
 
 const requestStore: StateCreator<
-    IQueryState,
+    IRequestState,
     [['zustand/persist', unknown]]
 > = (set) => ({
     ...initialState,
     setRequest: (request) => set(() => ({ request })),
 });
 
-const useRequestStore = create<IQueryState>()(
+const useRequestStore = create<IRequestState>()(
     persist(requestStore, {
         name: 'request-storage',
         storage: createJSONStorage(() => sessionStorage)

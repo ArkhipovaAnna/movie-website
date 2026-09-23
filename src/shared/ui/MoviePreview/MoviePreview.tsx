@@ -1,39 +1,41 @@
 import styles from './MoviePreview.module.scss';
-import type { Movie } from '../../../entities/movie/interfaces';
+import type { Movie, Details } from '../../../entities/movie/interfaces';
 import Rating from '../Rating/Rating';
-import filmLengthFormatted from '../../helpers/filmLengthFormatted';
+import Information from '../Information/Information';
+import { Link } from 'react-router';
 
 interface MoviePreviewProps {
-    movie: Movie;
+    movie: Movie | Details;
 }
 
 const MoviePreview = ({ movie }: MoviePreviewProps) => {
 
-    const countries = movie.countries.map(item => item.country).join(', ');
+    if (movie === undefined) return;
 
-    const genres = movie.genres.map(item => item.genre).join('/ ');
+    const isMovie = (movie: Movie | Details): movie is Movie => {
+        return 'filmId' in movie;
+    };
 
-    const filmLength = filmLengthFormatted(movie.filmLength);
+    const filmId = isMovie(movie) ? movie.filmId : movie.kinopoiskId;
+    const rating = isMovie(movie) ? movie.rating : movie.ratingKinopoisk;
 
     const isNoPosterPreview = movie.posterUrlPreview === 'https://kinopoiskapiunofficial.tech/images/posters/kp/no-poster.png';
 
     return (
         <div className={styles.wrapper}>
             <div className={styles.header}>
-                <h2>{movie.nameRu || movie.nameEn}</h2>
-                <Rating rating={movie.ratingKinopoisk || movie.rating} />
+                <Link to={`/details/${filmId}`} className={styles.link}>
+                    <h2>{movie.nameRu || movie.nameEn}</h2>
+                </Link>
+                <Rating rating={rating} />
             </div>
             <div className={styles.content}>
                 <div className={styles.imgWrapper}>
-                    <img src={isNoPosterPreview ? '/images/poster-placeholder.svg' : movie.posterUrlPreview} alt='Poster' />
+                    <Link to={`/details/${filmId}`}>
+                        <img src={isNoPosterPreview ? '/images/poster-placeholder.svg' : movie.posterUrlPreview} alt='Poster' />
+                    </Link>
                 </div>
-                <div className={styles.information}>
-                    <p><span>Год выпуска: </span> {movie.year === 'null' ? 'Неизвестно' : movie.year}</p>
-                    <p><span>Страна: </span>{countries || 'Неизвестно'}</p>
-                    <p className={styles.genres}><span>Жанр: </span>{genres.length > 0 ? genres : 'Неизвестно'}</p>
-                    <p ><span>Продолжительность: </span>{filmLength}</p>
-                    <p className={styles.description}>{movie.description}</p>
-                </div>
+                <Information movie={movie} />
             </div>
         </div>
     )

@@ -1,0 +1,47 @@
+.wrapper {
+    padding: 20px;
+    background-color: var(--color-background);
+    border: 1px solid black;
+    color: #eceff1;
+}
+
+.flexbox {
+    display: flex;
+    column-gap: 30px;
+}
+
+.photo {
+    width: 12vw;
+    height: 18vw;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+}
+
+.descriptionList {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    row-gap: 7px;
+    column-gap: 25px;
+
+    dt::after {
+        content: ':';
+    }
+
+    dt {
+        color: var(--color-dark-gray);
+        margin: 0;
+    }
+
+    dd {
+        color: var(--color-gray);
+        margin: 0;
+    }
+
+}
+
+.facts dd::before {
+    content: '-';
+    margin-right: 10px;
+    color: #64b5f6;
+
+}

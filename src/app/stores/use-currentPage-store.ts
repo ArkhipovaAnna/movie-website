@@ -32,10 +32,3 @@ const useCurrentPageStore = create<ICurrentPageState>()(
 
 export const useCurrentPage = () => useCurrentPageStore((state) => state.currentPage);
 export const handleSetCurrentPage = () => useCurrentPageStore.getState().setCurrentPage;
-
-/* export const useCurrentPage = {
-    currentPage: () => useCurrentPageStore((state) => state.currentPage),
-    setCurrentPage: () => useCurrentPageStore.getState().setCurrentPage
-};
-
-const { currentPage , setCurrentPage } = useCurrentPage() */

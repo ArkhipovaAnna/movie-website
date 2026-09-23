@@ -1,15 +1,27 @@
 .wrapper {
-    border-bottom: 2px solid black;
+    margin: 15px 0;
     padding: 15px 15px 30px 30px;
-}
+    border-radius: 5px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
 
-.wrapper h2 {
-    font-weight: 400;
+    h2 {
+        font-weight: 400;
+    }
+
 }
 
 .header {
     display: flex;
     justify-content: space-between;
+}
+
+.link {
+    text-decoration: none;
+    color: var(--color-light-gray);
+
+    &:hover {
+        color: orange;
+    }
 }
 
 .content {
@@ -29,18 +41,4 @@
     object-fit: cover;
     border-radius: 5px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-}
-
-.genres {
-    text-transform: capitalize;
-}
-
-.description {
-    margin-top: 30px;
-    font-weight: 400;
-    color: #cbcbcb;
-    display: -webkit-box;
-    -webkit-line-clamp: 10;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
 }

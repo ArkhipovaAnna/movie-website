@@ -15,3 +15,103 @@ export interface Movie {
     kinopoiskId?: number;
     ratingKinopoisk?: number;
 }
+
+export interface Details {
+    completed: boolean;
+    countries: Record<string, string>[];
+    coverUrl: string | null;
+    description: string;
+    editorAnnotation: string | null;
+    endYear: number | null;
+    filmLength: number;
+    genres: Record<string, string>[];
+    has3D: boolean;
+    hasImax: boolean;
+    imdbId: string;
+    isTicketsAvailable: boolean;
+    kinopoiskHDId: string | null;
+    kinopoiskId: number;
+    lastSync: string;
+    logoUrl: string | null;
+    nameEn: string | null;
+    nameOriginal: string | null;
+    nameRu: string;
+    posterUrl: string;
+    posterUrlPreview: string;
+    productionStatus: string | null;
+    ratingAgeLimits: string;
+    ratingAwait: number | null;
+    ratingAwaitCount: number;
+    ratingFilmCritics: number | null;
+    ratingFilmCriticsVoteCount: number;
+    ratingGoodReview: number;
+    ratingGoodReviewVoteCount: number;
+    ratingImdb: number;
+    ratingImdbVoteCount: number;
+    ratingKinopoisk: number;
+    ratingKinopoiskVoteCount: number;
+    ratingMpaa: string | null;
+    ratingRfCritics: number;
+    ratingRfCriticsVoteCount: number;
+    reviewsCount: number;
+    serial: boolean;
+    shortDescription: string | null;
+    shortFilm: boolean;
+    slogan: string;
+    startYear: number | null;
+    type: string;
+    webUrl: string;
+    year: number;
+}
+
+export interface Staff {
+    description: string;
+    nameEn: string;
+    nameRu: string;
+    posterUrl: string;
+    professionKey: string;
+    professionText: string;
+    staffId: number;
+}
+
+export interface Actor {
+    age: number;
+    birthday: string;
+    birthplace: string;
+    death: string | null;
+    deathplace: string | null;
+    facts: string[];
+    films: FilmographyItem[];
+    growth: number;
+    hasAwards: number;
+    nameEn: string;
+    nameRu: string;
+    personId: number;
+    posterUrl: string;
+    profession: string;
+    sex: string;
+    spouses: Spouses[];
+    webUrl: string;
+}
+
+export interface FilmographyItem {
+    description: string;
+    filmId: number;
+    general: boolean;
+    nameEn: string;
+    nameRu: string;
+    professionKey: string;
+    rating: string;
+    year: string;
+}
+
+interface Spouses {
+    children: number;
+    divorced: boolean;
+    divorcedReason: string;
+    name: string;
+    personId: number;
+    relation: string;
+    sex: string;
+    webUrl: string;
+}

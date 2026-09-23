@@ -7,7 +7,7 @@ interface RatingProps {
 const Rating = ({ rating }: RatingProps) => {
 
     if (rating === 'null') {
-        return <p>Нет оценок</p>;
+        return <p style={{ color: 'white' }}>Нет оценок</p>;
     }
 
     const numberRating = Number(rating);
@@ -19,9 +19,12 @@ const Rating = ({ rating }: RatingProps) => {
             precision={0.1}
             readOnly
             sx={{
-                alignSelf: 'flex-end',
+                alignSelf: 'center',
+                '& .MuiRating-icon': {
+                    color: 'white',
+                },
                 '& .MuiRating-iconFilled svg': {
-                    fill: '#ffb703 !important',
+                    fill: '#ffb703',
                 },
             }}
         />

@@ -1,0 +1,18 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    color: var(--color-yellow);
+
+    h2 {
+        font-size: 200px;
+    }
+
+    p {
+        font-size: 34px;
+    }
+
+
+}

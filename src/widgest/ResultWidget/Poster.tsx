@@ -1,23 +1,19 @@
 import styles from './Poster.module.scss';
-import type { Movie } from "../../entities/movie/interfaces";
 
 interface SearchResultProps {
-    data: Movie | null;
+    url: string;
 }
 
+const Poster = ({ url }: SearchResultProps) => {
 
-const Poster = ({ data }: SearchResultProps) => {
+    const isNoPoster = url === 'https://kinopoiskapiunofficial.tech/images/posters/kp/no-poster.png';
 
-    if (data !== null) {
+    return (
+        <div className={styles.wrapper}>
+            <img src={isNoPoster ? '/images/poster-placeholder.svg' : url} alt='Poster' />
+        </div>
+    )
 
-        const isNoPoster = data.posterUrl === 'https://kinopoiskapiunofficial.tech/images/posters/kp/no-poster.png';
-
-        return (
-            <div className={styles.wrapper}>
-                <img src={isNoPoster ? '/images/poster-placeholder.svg' : data.posterUrl} alt='Poster' />
-            </div>
-        )
-    }
 }
 
 export default Poster 

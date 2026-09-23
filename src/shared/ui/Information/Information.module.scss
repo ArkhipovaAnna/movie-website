@@ -1,0 +1,32 @@
+.descriptionList {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 20px;
+    font-size: 17px;
+
+    dt::after {
+        content: ':';
+    }
+
+    dt {
+        color: var(--color-dark-gray);
+        margin: 0;
+    }
+
+    dd {
+        color: var(--color-gray);
+        margin: 0;
+    }
+
+}
+
+.description {
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #cbcbcb;
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
