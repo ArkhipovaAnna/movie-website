@@ -58,7 +58,8 @@ const useSearchFilms = (): UseSearchFilmsReturn => {
             if (!res.ok) throw new Error('Bad Request');
             const json = await res.json();
 
-            if (!json.films || json.films.length === 0) {
+
+            if (!json.films) {
                 return { movies: null, totalPages: 1 };
             }
 
@@ -66,11 +67,6 @@ const useSearchFilms = (): UseSearchFilmsReturn => {
             const filteredFilms = json.films.filter(
                 (film: Movie) => film.posterUrl !== 'https://kinopoiskapiunofficial.tech/images/posters/kp/no-poster.png'
             );
-
-            if (filteredFilms.length === 0) {
-                return { movies: null, totalPages: 1 };
-            }
-
 
             let numberPages = Math.ceil(json.searchFilmsCountResult / 20);
             if (numberPages > 20) numberPages = 20;

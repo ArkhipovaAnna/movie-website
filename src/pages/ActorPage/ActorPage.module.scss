@@ -22,20 +22,21 @@
     grid-template-columns: auto 1fr;
     row-gap: 7px;
     column-gap: 25px;
-}
 
-dt::after {
-    content: ':';
-}
+    dt::after {
+        content: ':';
+    }
 
-dt {
-    color: var(--color-dark-gray);
-    margin: 0;
-}
+    dt {
+        color: var(--color-dark-gray);
+        margin: 0;
+    }
 
-dd {
-    color: var(--color-gray);
-    margin: 0;
+    dd {
+        color: var(--color-gray);
+        margin: 0;
+    }
+
 }
 
 .facts dd::before {

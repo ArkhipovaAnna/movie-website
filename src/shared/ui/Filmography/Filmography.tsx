@@ -21,8 +21,8 @@ const Filmography = ({ films }: FilmographyProps) => {
 
     return (
         <>
-            <h4>Фильмография</h4>
-            <div className={styles.wrapper}>
+            <h4 className={styles.header}>Фильмография</h4>
+            <div>
                 <ul>
                     {mainRoles.map(mainRole => {
 

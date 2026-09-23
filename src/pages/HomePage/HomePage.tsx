@@ -10,8 +10,9 @@ const HomePage = () => {
 
     const status =
         isLoading ? 'loading' :
-            !movies || movies.length === 0 ? 'fail' :
-                'success';
+            !movies ? 'fail' :
+                movies.length === 0 ? 'empty' :
+                    'success';
 
     return (
         <ContentWrapper status={status}>

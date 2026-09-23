@@ -3,12 +3,13 @@
     overflow-x: scroll;
     border-radius: 5px;
     background-color: #202023;
-}
 
-.wrapper h4 {
-    font-weight: 400;
-    font-size: 20px;
-    margin: 10px 15px;
+    h4 {
+        font-weight: 400;
+        font-size: 20px;
+        margin: 10px 15px;
+    }
+
 }
 
 .list {
@@ -16,6 +17,7 @@
 }
 
 /* Стили скроллбара (без стрелок) */
+/*Эти стили распространятся на все приложение, в т.ч. полосу вертикальной прокрутки*/
 
 /* Высота скроллбара */
 ::-webkit-scrollbar {
