@@ -16,8 +16,8 @@ const RouterProvider = () => {
                     <Route path='/' element={<HomePage />} />
                     <Route path='/details/:id' element={<DetailsPage />} />
                     <Route path='/staff/:id' element={<ActorPage />} />
+                    <Route path='*' element={<NotFound />} />
                 </Route>
-                <Route path='*' element={<NotFound />} />
             </Routes>
         </>
     )
