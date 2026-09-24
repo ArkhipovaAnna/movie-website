@@ -1,8 +1,8 @@
 import { useParams } from "react-router";
-import useSearchActor from "../../features/search/useSearchActor";
-import ContentWrapper from "../../shared/ui/ContentWrapper/ContentWrapper";
-import Filmography from "../../shared/ui/Filmography/Filmography";
-import dateFormatted from "../../shared/helpers/dateFormatted";
+import useSearchActor from "@/features/search/useSearchActor";
+import ContentWrapper from "@/shared/ui/ContentWrapper/ContentWrapper";
+import Filmography from "@/widgest/Filmography/Filmography";
+import dateFormatted from "@/shared/helpers/dateFormatted";
 import styles from './ActorPage.module.scss';
 
 const ActorPage = () => {
@@ -24,7 +24,7 @@ const ActorPage = () => {
         <ContentWrapper status={status}>
             <div className={styles.wrapper}>
                 <div className={styles.flexbox}>
-                    <img className={styles.photo} src={data.posterUrl} alt='Photo of the actor' />
+                    <img className={styles.photo} src={data.posterUrl} loading="lazy" alt='Photo of the actor' />
                     <div>
                         <dl className={styles.descriptionList}>
                             <dt>Имя</dt>

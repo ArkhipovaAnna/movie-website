@@ -1,7 +1,7 @@
-import Pagination from "../../shared/ui/Pagination/Pagination";
-import MoviePreview from "../../shared/ui/MoviePreview/MoviePreview";
-import useSearchFilms from "../../features/search/useSearchFilms";
-import ContentWrapper from "../../shared/ui/ContentWrapper/ContentWrapper";
+import Pagination from "@/shared/ui/Pagination/Pagination";
+import MoviePreview from "@/shared/ui/MoviePreview/MoviePreview";
+import useSearchFilms from "@/features/search/useSearchFilms";
+import ContentWrapper from "@/shared/ui/ContentWrapper/ContentWrapper";
 import styles from './HomePage.module.scss';
 
 const HomePage = () => {

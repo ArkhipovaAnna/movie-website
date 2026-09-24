@@ -1,5 +1,5 @@
 import MuiPagination from '@mui/material/Pagination';
-import { useCurrentPage, handleSetCurrentPage } from '../../../app/stores/use-currentPage-store';
+import { useCurrentPage, handleSetCurrentPage } from '@/app/stores/use-currentPage-store';
 
 
 interface PaginationProps {

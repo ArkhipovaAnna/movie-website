@@ -10,7 +10,7 @@ const Poster = ({ url }: SearchResultProps) => {
 
     return (
         <div className={styles.wrapper}>
-            <img src={isNoPoster ? '/images/poster-placeholder.svg' : url} alt='Poster' />
+            <img src={isNoPoster ? '/images/poster-placeholder.svg' : url} loading="lazy" alt='Poster' />
         </div>
     )
 

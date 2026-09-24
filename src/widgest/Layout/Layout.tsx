@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 import SearchForm from "../SearchWidget/SearchForm"
-import HomeIcon from "../../shared/ui/HomeIcon/HomeIcon";
+import HomeIcon from "@/shared/ui/HomeIcon/HomeIcon";
 
 const Layout = () => {
 

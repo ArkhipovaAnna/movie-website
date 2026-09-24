@@ -1,7 +1,7 @@
 import styles from './ContentWrapper.module.scss';
 import Loader from '../Loader/Loader';
 import Fail from '../Fail/Fail';
-import NotFound from '../../../pages/NotFound/NotFound';
+import NotFound from '@/pages/NotFound/NotFound';
 import ArrowUp from '../Arrows/ArrowUp';
 import ArrowDown from '../Arrows/ArrowDown';
 

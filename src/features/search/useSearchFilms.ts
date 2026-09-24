@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import type { Movie } from '../../entities/movie/interfaces';
-import { useRequest } from '../../app/stores/use-request-store';
-import { useCurrentPage } from '../../app/stores/use-currentPage-store';
+import type { Movie } from '@/entities/movie/interfaces';
+import { useRequest } from '@/app/stores/use-request-store';
+import { useCurrentPage } from '@/app/stores/use-currentPage-store';
 
 interface UseSearchFilmsReturn {
     movies: Movie[] | null;

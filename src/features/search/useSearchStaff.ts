@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { Staff } from "../../entities/movie/interfaces";
+import type { Staff } from "@/entities/movie/interfaces";
 
 interface UseSearchStaffReturn {
     data: Staff[];

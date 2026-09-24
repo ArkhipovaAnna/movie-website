@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { Details } from "../../entities/movie/interfaces";
+import type { Details } from "@/entities/movie/interfaces";
 
 interface UseSearchDetailsReturn {
     data: Details;

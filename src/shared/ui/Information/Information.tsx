@@ -1,4 +1,4 @@
-import type { Movie, Details } from "../../../entities/movie/interfaces";
+import type { Movie, Details } from "@/entities/movie/interfaces";
 import filmLengthFormatted from "../../helpers/filmLengthFormatted";
 import styles from './Information.module.scss';
 

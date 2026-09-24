@@ -1,9 +1,9 @@
-import Field from "../../shared/ui/Field/Field";
-import Button from "../../shared/ui/Button/Button";
+import Field from "@/shared/ui/Field/Field";
+import Button from "@/shared/ui/Button/Button";
 import styles from './SearchForm.module.scss';
-import { handleSetRequest } from "../../app/stores/use-request-store";
-import { handleSetCurrentPage } from "../../app/stores/use-currentPage-store";
-import { useSearchFormValue, handleSetSearchFormValue } from "../../app/stores/use-searchFormValue-store";
+import { handleSetRequest } from "@/app/stores/use-request-store";
+import { handleSetCurrentPage } from "@/app/stores/use-currentPage-store";
+import { useSearchFormValue, handleSetSearchFormValue } from "@/app/stores/use-searchFormValue-store";
 import { useNavigate } from "react-router";
 
 const SearchForm = () => {

@@ -2,7 +2,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CardActionArea from '@mui/material/CardActionArea';
-import type { Staff } from '../../../entities/movie/interfaces';
+import type { Staff } from '@/entities/movie/interfaces';
 import styles from './ActorCard.module.scss';
 
 interface ActorCardProps {

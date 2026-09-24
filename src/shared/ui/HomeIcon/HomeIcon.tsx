@@ -1,8 +1,8 @@
 import MuiSvgIcon, { type SvgIconProps } from '@mui/material/SvgIcon';
 import IconButton from '@mui/material/IconButton';
-import { handleSetRequest } from '../../../app/stores/use-request-store';
-import { handleSetCurrentPage } from '../../../app/stores/use-currentPage-store';
-import { handleSetSearchFormValue } from '../../../app/stores/use-searchFormValue-store';
+import { handleSetRequest } from '@/app/stores/use-request-store';
+import { handleSetCurrentPage } from '@/app/stores/use-currentPage-store';
+import { handleSetSearchFormValue } from '@/app/stores/use-searchFormValue-store';
 import { Link } from 'react-router';
 
 const SvgIcon = (props: SvgIconProps) => {

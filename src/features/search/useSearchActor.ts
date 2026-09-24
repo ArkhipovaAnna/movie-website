@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { Actor } from "../../entities/movie/interfaces";
+import type { Actor } from "@/entities/movie/interfaces";
 
 interface UseSearchActorReturn {
     data: Actor;

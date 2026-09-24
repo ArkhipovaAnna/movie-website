@@ -1,9 +1,9 @@
 import { useParams } from "react-router";
-import useSearchDetails from "../../features/search/useSearchDetails";
-import InfoResult from "../../widgest/ResultWidget/InfoResult";
-import Poster from "../../widgest/ResultWidget/Poster";
-import Staff from "../../widgest/ResultWidget/Staff";
-import ContentWrapper from "../../shared/ui/ContentWrapper/ContentWrapper";
+import useSearchDetails from "@/features/search/useSearchDetails";
+import InfoResult from "@/widgest/ResultWidget/InfoResult";
+import Poster from "@/widgest/ResultWidget/Poster";
+import Staff from "@/widgest/ResultWidget/Staff";
+import ContentWrapper from "@/shared/ui/ContentWrapper/ContentWrapper";
 import styles from './DetailsPage.module.scss';
 
 const DetailsPage = () => {

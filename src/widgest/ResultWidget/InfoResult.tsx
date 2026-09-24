@@ -1,6 +1,6 @@
-import type { Details } from "../../entities/movie/interfaces";
-import Information from "../../shared/ui/Information/Information";
-import Rating from "../../shared/ui/Rating/Rating";
+import type { Details } from "@/entities/movie/interfaces";
+import Information from "@/shared/ui/Information/Information";
+import Rating from "@/shared/ui/Rating/Rating";
 import styles from './InfoResult.module.scss';
 
 interface SearchResultProps {

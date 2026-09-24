@@ -1,5 +1,5 @@
 import styles from './MoviePreview.module.scss';
-import type { Movie, Details } from '../../../entities/movie/interfaces';
+import type { Movie, Details } from '@/entities/movie/interfaces';
 import Rating from '../Rating/Rating';
 import Information from '../Information/Information';
 import { Link } from 'react-router';
@@ -32,7 +32,7 @@ const MoviePreview = ({ movie }: MoviePreviewProps) => {
             <div className={styles.content}>
                 <div className={styles.imgWrapper}>
                     <Link to={`/details/${filmId}`}>
-                        <img src={isNoPosterPreview ? '/images/poster-placeholder.svg' : movie.posterUrlPreview} alt='Poster' />
+                        <img src={isNoPosterPreview ? '/images/poster-placeholder.svg' : movie.posterUrlPreview} loading="lazy" alt='Poster' />
                     </Link>
                 </div>
                 <Information movie={movie} />

@@ -1,10 +1,9 @@
-import type { FilmographyItem } from "../../../entities/movie/interfaces";
-import MoviePreview from "../MoviePreview/MoviePreview";
-import useSearchDetails from "../../../features/search/useSearchDetails";
+import type { IFilmographyItem } from "@/entities/movie/interfaces";
+import FilmographyItem from "@/shared/ui/FilmographyItem/FilmographyItem";
 import styles from './Filmography.module.scss';
 
 interface FilmographyProps {
-    films: FilmographyItem[];
+    films: IFilmographyItem[];
 }
 
 const Filmography = ({ films }: FilmographyProps) => {
@@ -25,12 +24,9 @@ const Filmography = ({ films }: FilmographyProps) => {
             <div>
                 <ul>
                     {mainRoles.map(mainRole => {
-
-                        const { data } = useSearchDetails(mainRole.filmId);
-
                         return (
                             <li key={mainRole.filmId}>
-                                <MoviePreview movie={data} />
+                                <FilmographyItem filmId={mainRole.filmId} />
                             </li>
                         )
                     })}

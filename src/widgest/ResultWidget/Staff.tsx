@@ -1,5 +1,5 @@
-import useSearchStaff from "../../features/search/useSearchStaff";
-import ActorCard from "../../shared/ui/ActorCard/ActorCard";
+import useSearchStaff from "@/features/search/useSearchStaff";
+import ActorCard from "@/shared/ui/ActorCard/ActorCard";
 import { Link } from "react-router";
 import styles from './Staff.module.scss';
 
