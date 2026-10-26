@@ -1,4 +1,4 @@
-const filmLengthFormatted = (filmLength: string | number) => {
+const filmLengthFormatted = (filmLength: string | number | null) => {
 
     let hours = 0;
     let minutes = 0;
@@ -20,6 +20,10 @@ const filmLengthFormatted = (filmLength: string | number) => {
 
     if (hours === 0) {
         return `${minutes} мин`
+    }
+
+    if (minutes === 0) {
+        return `${hours} ч`
     }
 
     return `${hours} ч ${minutes} мин`;

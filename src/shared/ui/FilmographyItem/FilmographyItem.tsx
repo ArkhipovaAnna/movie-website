@@ -10,7 +10,7 @@ const FilmographyItem = ({ filmId }: FilmographyItem) => {
     const { data, isLoading, isError } = useSearchDetails(filmId);
 
     if (isLoading) return <div>Загрузка...</div>
-    if (isError) return <div>Ошибка загрузки</div>
+    if (isError || data === undefined) return null;
 
     return (
         <MoviePreview movie={data} />

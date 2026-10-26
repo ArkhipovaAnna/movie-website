@@ -6,7 +6,7 @@ import styles from './HomePage.module.scss';
 
 const HomePage = () => {
 
-    const { movies, totalPages, isLoading } = useSearchFilms();
+    const { movies, totalPages, isLoading, error } = useSearchFilms();
 
     const status =
         isLoading ? 'loading' :
@@ -15,7 +15,7 @@ const HomePage = () => {
                     'success';
 
     return (
-        <ContentWrapper status={status}>
+        <ContentWrapper status={status} error={error}>
             <div className={styles.wrapper}>
                 <div className={styles.list}>
                     <ul>

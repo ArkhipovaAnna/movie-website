@@ -1,36 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
-import type { Actor } from "@/entities/movie/interfaces";
+import { ActorSchema, type Actor } from "@/entities/movie/schemas";
+import { apiGet } from "@/shared/api/client";
 
 interface UseSearchActorReturn {
-    data: Actor;
+    data: Actor | undefined;
     isLoading: boolean;
     isError: boolean;
+    error: Error | null;
 }
 
-const key = import.meta.env.VITE_KINOPOISK_KEY;
 
 const useSearchActor = (id: number): UseSearchActorReturn => {
 
-    const { data, isLoading, isError } = useQuery({
+    const { data, isLoading, isError, error } = useQuery({
 
         queryKey: ['actor', { id: id }],
 
-        queryFn: async () => {
-            const headers = {
-                'X-API-KEY': key,
-                'Content-Type': 'application/json',
-            };
+        enabled: Number.isInteger(id) && id > 0,
 
-            const res = await fetch(
-                `https://kinopoiskapiunofficial.tech/api/v1/staff/${id}`,
-                { method: 'GET', headers }
-            );
-            if (!res.ok) throw new Error('Bad Request');
-
-            const json = await res.json();
-
-            return json;
-        },
+        queryFn: ({ signal }) =>
+            apiGet(`/api/v1/staff/${id}`, ActorSchema, {}, signal),
 
         staleTime: 1000 * 60 * 5,
     });
@@ -39,6 +28,7 @@ const useSearchActor = (id: number): UseSearchActorReturn => {
         data,
         isLoading,
         isError,
+        error,
     };
 };
 

@@ -1,36 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
-import type { Details } from "@/entities/movie/interfaces";
+import { DetailsSchema, type Details } from "@/entities/movie/schemas";
+import { apiGet } from "@/shared/api/client";
 
 interface UseSearchDetailsReturn {
-    data: Details;
+    data: Details | undefined;
     isLoading: boolean;
     isError: boolean;
+    error: Error | null;
 }
-
-const key = import.meta.env.VITE_KINOPOISK_KEY;
 
 const useSearchDetails = (id: number): UseSearchDetailsReturn => {
 
-    const { data, isLoading, isError } = useQuery({
+    const { data, isLoading, isError, error } = useQuery({
 
         queryKey: ['details', { id: id }],
 
-        queryFn: async () => {
-            const headers = {
-                'X-API-KEY': key,
-                'Content-Type': 'application/json',
-            };
+        enabled: Number.isInteger(id) && id > 0,
 
-            const res = await fetch(
-                `https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}`,
-                { method: 'GET', headers }
-            );
-            if (!res.ok) throw new Error('Bad Request');
-
-            const json = await res.json();
-
-            return json;
-        },
+        queryFn: ({ signal }) =>
+            apiGet(`/api/v2.2/films/${id}`, DetailsSchema, {}, signal),
 
         staleTime: 1000 * 60 * 5,
     });
@@ -39,6 +27,7 @@ const useSearchDetails = (id: number): UseSearchDetailsReturn => {
         data,
         isLoading,
         isError,
+        error,
     };
 };
 

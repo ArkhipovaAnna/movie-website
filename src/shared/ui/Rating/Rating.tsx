@@ -1,12 +1,12 @@
 import MuiRating from '@mui/material/Rating';
 
 interface RatingProps {
-    rating: number | string;
+    rating: number | string | null;
 }
 
 const Rating = ({ rating }: RatingProps) => {
 
-    if (rating === 'null') {
+    if (rating === null || rating === '' || rating === 'null') {
         return <p style={{ color: 'white' }}>Нет оценок</p>;
     }
 
@@ -15,7 +15,7 @@ const Rating = ({ rating }: RatingProps) => {
 
     return (
         <MuiRating
-            defaultValue={value}
+            value={value}
             precision={0.1}
             readOnly
             sx={{

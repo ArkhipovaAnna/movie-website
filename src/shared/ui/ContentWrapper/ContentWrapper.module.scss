@@ -1,5 +1,6 @@
 .container {
-    margin: 50px auto 100px;
+    flex: 1;
+    margin: 50px 0 40px;
 
     display: grid;
     grid-template-columns: 1fr max-content 1fr;
@@ -9,6 +10,10 @@
 .content {
     grid-column: 2;
     width: 70vw;
+
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
 }
 
 

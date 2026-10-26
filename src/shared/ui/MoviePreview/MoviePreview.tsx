@@ -2,6 +2,7 @@ import styles from './MoviePreview.module.scss';
 import type { Movie, Details } from '@/entities/movie/interfaces';
 import Rating from '../Rating/Rating';
 import Information from '../Information/Information';
+import SafeImage from '../SafeImage/SafeImage';
 import { Link } from 'react-router';
 
 interface MoviePreviewProps {
@@ -19,8 +20,6 @@ const MoviePreview = ({ movie }: MoviePreviewProps) => {
     const filmId = isMovie(movie) ? movie.filmId : movie.kinopoiskId;
     const rating = isMovie(movie) ? movie.rating : movie.ratingKinopoisk;
 
-    const isNoPosterPreview = movie.posterUrlPreview === 'https://kinopoiskapiunofficial.tech/images/posters/kp/no-poster.png';
-
     return (
         <div className={styles.wrapper}>
             <div className={styles.header}>
@@ -32,7 +31,7 @@ const MoviePreview = ({ movie }: MoviePreviewProps) => {
             <div className={styles.content}>
                 <div className={styles.imgWrapper}>
                     <Link to={`/details/${filmId}`}>
-                        <img src={isNoPosterPreview ? '/images/poster-placeholder.svg' : movie.posterUrlPreview} loading="lazy" alt='Poster' />
+                        <SafeImage src={movie.posterUrlPreview} alt='Poster' />
                     </Link>
                 </div>
                 <Information movie={movie} />

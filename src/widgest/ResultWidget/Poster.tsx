@@ -1,3 +1,4 @@
+import SafeImage from '@/shared/ui/SafeImage/SafeImage';
 import styles from './Poster.module.scss';
 
 interface SearchResultProps {
@@ -6,11 +7,9 @@ interface SearchResultProps {
 
 const Poster = ({ url }: SearchResultProps) => {
 
-    const isNoPoster = url === 'https://kinopoiskapiunofficial.tech/images/posters/kp/no-poster.png';
-
     return (
         <div className={styles.wrapper}>
-            <img src={isNoPoster ? '/images/poster-placeholder.svg' : url} loading="lazy" alt='Poster' />
+            <SafeImage src={url} alt='Poster' />
         </div>
     )
 

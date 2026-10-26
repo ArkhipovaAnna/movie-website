@@ -1,0 +1,13 @@
+name = "kinopoisk-proxy"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+# Через запятую. Сюда нужны адреса вашего фронтенда, без слеша в конце.
+ALLOWED_ORIGINS = "http://localhost:5173"
+
+# Ограничение частоты запросов (необязательно, но рекомендую)
+[[ratelimits]]
+name = "LIMITER"
+namespace_id = "1001"
+simple = { limit = 60, period = 60 }

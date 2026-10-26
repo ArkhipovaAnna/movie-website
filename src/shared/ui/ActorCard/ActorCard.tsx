@@ -3,6 +3,8 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CardActionArea from '@mui/material/CardActionArea';
 import type { Staff } from '@/entities/movie/interfaces';
+import useSafeImage from '@/shared/ui/SafeImage/useSafeImage';
+import { ACTOR_PLACEHOLDER_SRC } from '@/shared/config/images';
 import styles from './ActorCard.module.scss';
 
 interface ActorCardProps {
@@ -10,13 +12,17 @@ interface ActorCardProps {
 }
 
 const ActorCard = ({ person }: ActorCardProps) => {
+
+    const { src, ...imageProps } = useSafeImage(person.posterUrl, ACTOR_PLACEHOLDER_SRC);
+
     return (
         <Card className={styles.card} sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
             <CardActionArea>
                 <CardMedia
                     component="img"
-                    image={person.posterUrl}
-                    alt={person.nameRu || person.nameEn}
+                    image={src}
+                    {...imageProps}
+                    alt={(person.nameRu || person.nameEn) ?? undefined}
                     className={styles.cardMedia} />
                 <CardContent>
                     <p className={styles.name}>

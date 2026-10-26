@@ -1,9 +1,17 @@
+import getErrorMessage from '@/shared/api/getErrorMessage';
 import styles from './Fail.module.scss';
 
-const Fail = () => {
+interface FailProps {
+    error?: unknown;
+}
+
+const Fail = ({ error }: FailProps) => {
+
+    const { title, hint } = getErrorMessage(error);
+
     return (
         <div className={styles.wrapper}>
-            <p className={styles.text}>Что-то пошло не так.<br />Повторите попытку позже.</p>
+            <p className={styles.text}>{title}<br />{hint}</p>
         </div>
     )
 }

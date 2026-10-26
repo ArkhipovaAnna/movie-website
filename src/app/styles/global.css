@@ -12,3 +12,15 @@ body {
 li {
     list-style-type: none
 }
+
+#root {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}

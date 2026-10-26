@@ -1,18 +1,25 @@
 import { useParams } from "react-router";
 import useSearchDetails from "@/features/search/useSearchDetails";
-import InfoResult from "@/widgest/ResultWidget/InfoResult";
-import Poster from "@/widgest/ResultWidget/Poster";
-import Staff from "@/widgest/ResultWidget/Staff";
 import ContentWrapper from "@/shared/ui/ContentWrapper/ContentWrapper";
-import styles from './DetailsPage.module.scss';
+import DetailsView from "./DetailsView";
+import isValidIdHepler from "@/shared/helpers/isValidIdHelper";
+
 
 const DetailsPage = () => {
 
     const { id } = useParams();
 
-    if (id === undefined) return;
+    const isValidId = isValidIdHepler(id);
 
-    const { data, isLoading, isError } = useSearchDetails(Number(id));
+    const { data, isLoading, isError, error } = useSearchDetails(isValidId ? Number(id) : 0);
+
+    if (!isValidId) {
+        return (
+            <ContentWrapper status={'empty'}>
+                <></>
+            </ContentWrapper>
+        )
+    }
 
     const status =
         isLoading ? 'loading' :
@@ -20,21 +27,8 @@ const DetailsPage = () => {
                 'success';
 
     return (
-        <ContentWrapper status={status}>
-            <div className={styles.wrapper}>
-                <Poster url={data?.posterUrl} />
-                <InfoResult data={data} />
-                <Staff id={data?.kinopoiskId} />
-                <div style={{
-                    gridColumn: '1 / -1',
-                    height: 100,
-                    borderWidth: 2,
-                    borderColor: 'orange',
-                    borderStyle: 'solid',
-                }}>
-                    Trailer
-                </div>
-            </div>
+        <ContentWrapper status={status} error={error}>
+            {data && <DetailsView data={data} />}
         </ContentWrapper>
     )
 }

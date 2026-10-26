@@ -1,10 +1,10 @@
-import RouterProvider from './providers/router/RouterProvider'
+import AppRoutes from './providers/router/AppRoutes'
 import './styles'
 
 function App() {
 
   return (
-    <RouterProvider />
+    <AppRoutes />
   )
 }
 

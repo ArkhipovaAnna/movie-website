@@ -1,13 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import type { Staff } from "@/entities/movie/interfaces";
+import { StaffListSchema, type Staff } from "@/entities/movie/schemas";
+import { apiGet } from "@/shared/api/client";
 
 interface UseSearchStaffReturn {
-    data: Staff[];
+    data: Staff[] | undefined;
     isLoading: boolean;
     isError: boolean;
 }
-
-const key = import.meta.env.VITE_KINOPOISK_KEY;
 
 const useSearchStaff = (id: number): UseSearchStaffReturn => {
 
@@ -15,24 +14,15 @@ const useSearchStaff = (id: number): UseSearchStaffReturn => {
 
         queryKey: ['staff', { id: id }],
 
-        queryFn: async () => {
-            const headers = {
-                'X-API-KEY': key,
-                'Content-Type': 'application/json',
-            };
+        enabled: Number.isInteger(id) && id > 0,
 
-            const res = await fetch(
-                `https://kinopoiskapiunofficial.tech/api/v1/staff?filmId=${id}`,
-                { method: 'GET', headers }
-            );
-            if (!res.ok) throw new Error('Bad Request');
+        queryFn: async ({ signal }) => {
 
-            const json = await res.json();
-            const actors = json
-                .filter((person: Staff) => person.professionKey === 'ACTOR')
+            const people = await apiGet('/api/v1/staff', StaffListSchema, { filmId: id }, signal);
+
+            return people
+                .filter((person) => person.professionKey === 'ACTOR')
                 .slice(0, 15);
-
-            return actors;
         },
 
         staleTime: 1000 * 60 * 5,

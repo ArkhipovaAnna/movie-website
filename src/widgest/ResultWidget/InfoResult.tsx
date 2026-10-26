@@ -9,7 +9,7 @@ interface SearchResultProps {
 
 const InfoResult = ({ data }: SearchResultProps) => {
 
-    if (data === undefined) return;
+    if (data === undefined) return null;
 
     return (
         <div className={styles.wrapper}>

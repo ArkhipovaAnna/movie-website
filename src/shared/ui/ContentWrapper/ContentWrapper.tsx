@@ -7,15 +7,16 @@ import ArrowDown from '../Arrows/ArrowDown';
 
 interface ContentWrapperProps {
     status: 'loading' | 'fail' | 'empty' | 'success';
+    error?: unknown;
     children: React.ReactNode;
 }
 
-const ContentWrapper = ({ status, children }: ContentWrapperProps) => {
+const ContentWrapper = ({ status, error, children }: ContentWrapperProps) => {
     return (
         <div className={styles.container}>
             <div className={styles.content}>
                 {status === 'loading' && <Loader />}
-                {status === 'fail' && <Fail />}
+                {status === 'fail' && <Fail error={error} />}
                 {status === 'empty' && <NotFound />}
                 {status === 'success' && children}
             </div>

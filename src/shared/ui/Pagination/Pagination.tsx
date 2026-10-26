@@ -11,7 +11,7 @@ const Pagination = ({ count }: PaginationProps) => {
     const currentPage = useCurrentPage();
     const setCurrentPage = handleSetCurrentPage();
 
-    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
         setCurrentPage(value);
         window.scrollTo({
             top: 0,
