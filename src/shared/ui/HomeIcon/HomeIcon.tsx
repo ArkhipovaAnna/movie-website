@@ -21,6 +21,9 @@ const HomeIcon = () => {
 
     return (
         <IconButton
+            component={Link}
+            to="/"
+            aria-label="На главную"
             sx={{
                 position: 'fixed',
                 top: 20,
@@ -32,12 +35,10 @@ const HomeIcon = () => {
                 setSearchFormValue('')
             }}
         >
-            <Link to={'/'}>
-                <SvgIcon
-                    fontSize="large"
-                    sx={{ color: '#eceff1' }}
-                />
-            </Link>
+            <SvgIcon
+                fontSize="large"
+                sx={{ color: '#eceff1' }}
+            />
         </IconButton>
     );
 }

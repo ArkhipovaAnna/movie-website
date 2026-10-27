@@ -20,7 +20,7 @@ const useSearchDetails = (id: number): UseSearchDetailsReturn => {
         queryFn: ({ signal }) =>
             apiGet(`/api/v2.2/films/${id}`, DetailsSchema, {}, signal),
 
-        staleTime: 1000 * 60 * 5,
+        staleTime: 1000 * 60 * 60,
     });
 
     return {

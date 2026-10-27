@@ -1,5 +1,10 @@
 const UPSTREAM = 'https://kinopoiskapiunofficial.tech';
-const CACHE_SECONDS = 300;
+const HOUR = 60 * 60;
+const DAY = 24 * HOUR;
+const UPSTREAM_TIMEOUT_MS = 10000;
+const DEFAULT_RETRY_AFTER_SECONDS = 5;
+const OWN_LIMIT_RETRY_AFTER_SECONDS = 60;
+
 
 const ID = /^[1-9]\d{0,9}$/;
 const PAGE = /^[1-9]\d{0,2}$/;
@@ -9,16 +14,19 @@ const PAGE = /^[1-9]\d{0,2}$/;
 const ROUTES = [
     {
         path: /^\/api\/v2\.2\/films\/collections$/,
+        ttl: HOUR,
         params: { type: { re: /^[A-Z_]{1,40}$/, required: true }, page: { re: PAGE } },
     },
     {
         path: /^\/api\/v2\.1\/films\/search-by-keyword$/,
+        ttl: HOUR,
         params: { keyword: { re: /^.{1,100}$/s, required: true }, page: { re: PAGE } },
     },
-    { path: /^\/api\/v2\.2\/films\/[1-9]\d{0,9}$/, params: {} },
-    { path: /^\/api\/v1\/staff$/, params: { filmId: { re: ID, required: true } } },
-    { path: /^\/api\/v1\/staff\/[1-9]\d{0,9}$/, params: {} },
+    { path: /^\/api\/v2\.2\/films\/[1-9]\d{0,9}$/, ttl: DAY, params: {} },
+    { path: /^\/api\/v1\/staff$/, ttl: DAY, params: { filmId: { re: ID, required: true } } },
+    { path: /^\/api\/v1\/staff\/[1-9]\d{0,9}$/, ttl: DAY, params: {} },
 ];
+
 
 const json = (status, body, extra = {}) =>
     new Response(JSON.stringify(body), {
@@ -26,8 +34,9 @@ const json = (status, body, extra = {}) =>
         headers: { 'Content-Type': 'application/json', ...extra },
     });
 
-// Возвращает собранный адрес апстрима или null, если запрос не по правилам.
-const buildUpstreamUrl = (url) => {
+
+// Возвращает { url, ttl } или null, если запрос не по правилам.
+const resolveTarget = (url) => {
     const route = ROUTES.find((r) => r.path.test(url.pathname));
     if (!route) return null;
 
@@ -41,8 +50,9 @@ const buildUpstreamUrl = (url) => {
     for (const [name, rule] of Object.entries(route.params)) {
         if (rule.required && !upstream.searchParams.has(name)) return null;
     }
-    return upstream;
+    return { url: upstream, ttl: route.ttl };
 };
+
 
 export default {
     async fetch(request, env, ctx) {
@@ -56,8 +66,13 @@ export default {
             return json(403, { error: 'Forbidden origin' });
         }
 
+        // Expose-Headers нужен, чтобы JS в браузере мог прочитать Retry-After.
         const cors = origin
-            ? { 'Access-Control-Allow-Origin': origin, Vary: 'Origin' }
+            ? {
+                'Access-Control-Allow-Origin': origin,
+                'Access-Control-Expose-Headers': 'Retry-After',
+                Vary: 'Origin',
+            }
             : {};
 
         if (request.method === 'OPTIONS') {
@@ -70,42 +85,80 @@ export default {
             return json(405, { error: 'Method not allowed' }, cors);
         }
 
-        const upstreamUrl = buildUpstreamUrl(new URL(request.url));
-        if (!upstreamUrl) {
+        const target = resolveTarget(new URL(request.url));
+        if (!target) {
             return json(404, { error: 'Not found' }, cors);
         }
+        const { url: upstreamUrl, ttl } = target;
 
-        if (env.LIMITER) {
-            const ip = request.headers.get('CF-Connecting-IP') ?? 'unknown';
-            const { success } = await env.LIMITER.limit({ key: ip });
-            if (!success) return json(429, { error: 'Too many requests' }, cors);
-        }
-
-        // Кэш Cloudflare: экономит лимит Кинопоиска.
+        // 1. Сначала кэш: ответ из кэша не тратит ни лимит воркера, ни квоту Кинопоиска.
         const cache = caches.default;
         const cacheKey = new Request(upstreamUrl.toString(), { method: 'GET' });
         const cached = await cache.match(cacheKey);
         if (cached) {
             const res = new Response(cached.body, cached);
             for (const [k, v] of Object.entries(cors)) res.headers.set(k, v);
+            res.headers.set('X-Cache', 'HIT');
             return res;
         }
 
-        const upstreamRes = await fetch(upstreamUrl, {
-            headers: { 'X-API-KEY': env.KINOPOISK_KEY, Accept: 'application/json' },
-        });
+        // 2. Собственный лимит воркера (только для запросов, которым нужен поход в Кинопоиск).
+        if (env.LIMITER) {
+            const ip = request.headers.get('CF-Connecting-IP') ?? 'unknown';
+            const { success } = await env.LIMITER.limit({ key: ip });
+            if (!success) {
+                return json(
+                    429,
+                    { error: 'Too many requests', retryAfter: OWN_LIMIT_RETRY_AFTER_SECONDS },
+                    { ...cors, 'Retry-After': String(OWN_LIMIT_RETRY_AFTER_SECONDS), 'Cache-Control': 'no-store' },
+                );
+            }
+        }
+
+        // 3. Запрос к Кинопоиску с таймаутом.
+        let upstreamRes;
+        try {
+            upstreamRes = await fetch(upstreamUrl, {
+                headers: { 'X-API-KEY': env.KINOPOISK_KEY, Accept: 'application/json' },
+                signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
+            });
+        } catch (error) {
+            const isTimeout = error?.name === 'TimeoutError';
+            return json(
+                isTimeout ? 504 : 502,
+                { error: isTimeout ? 'Upstream timeout' : 'Upstream unreachable' },
+                { ...cors, 'Cache-Control': 'no-store' },
+            );
+        }
+
+        // 4. Кинопоиск ответил 429: отдаём аккуратный JSON вместо его HTML-страницы.
+        if (upstreamRes.status === 429) {
+            const headerSeconds = Number(upstreamRes.headers.get('Retry-After'));
+            const retryAfter = Number.isFinite(headerSeconds) && headerSeconds > 0
+                ? headerSeconds
+                : DEFAULT_RETRY_AFTER_SECONDS;
+
+            await upstreamRes.body?.cancel();
+
+            return json(
+                429,
+                { error: 'Upstream rate limit', retryAfter },
+                { ...cors, 'Retry-After': String(retryAfter), 'Cache-Control': 'no-store' },
+            );
+        }
 
         const res = new Response(upstreamRes.body, {
             status: upstreamRes.status,
             headers: {
                 'Content-Type': upstreamRes.headers.get('Content-Type') ?? 'application/json',
-                'Cache-Control': upstreamRes.ok ? `public, max-age=${CACHE_SECONDS}` : 'no-store',
+                'Cache-Control': upstreamRes.ok ? `public, max-age=${ttl}` : 'no-store',
             },
         });
 
         if (upstreamRes.ok) ctx.waitUntil(cache.put(cacheKey, res.clone()));
 
         for (const [k, v] of Object.entries(cors)) res.headers.set(k, v);
+        res.headers.set('X-Cache', 'MISS');
         return res;
     },
 };

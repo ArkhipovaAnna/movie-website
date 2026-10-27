@@ -21,7 +21,7 @@ const useSearchActor = (id: number): UseSearchActorReturn => {
         queryFn: ({ signal }) =>
             apiGet(`/api/v1/staff/${id}`, ActorSchema, {}, signal),
 
-        staleTime: 1000 * 60 * 5,
+        staleTime: 1000 * 60 * 60,
     });
 
     return {

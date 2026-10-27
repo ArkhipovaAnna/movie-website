@@ -25,7 +25,7 @@ const useSearchStaff = (id: number): UseSearchStaffReturn => {
                 .slice(0, 15);
         },
 
-        staleTime: 1000 * 60 * 5,
+        staleTime: 1000 * 60 * 60,
     });
 
     return {
