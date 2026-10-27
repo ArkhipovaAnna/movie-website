@@ -4,14 +4,16 @@ interface ButtonProps {
     children: string;
     type: 'submit' | 'reset' | 'button';
     variant?: 'text' | 'contained' | 'outlined';
+    onClick?: () => void;
 }
-const Button = ({ children, type, variant }: ButtonProps) => {
+const Button = ({ children, type, variant, onClick }: ButtonProps) => {
 
     return (
         <MuiButton
             type={type}
             variant={variant}
             size="small"
+            onClick={onClick}
             sx={{
                 backgroundColor: 'gray',
                 color: 'black',

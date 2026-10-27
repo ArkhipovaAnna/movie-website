@@ -1,10 +1,14 @@
 import { Suspense } from 'react';
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router";
 import SearchForm from "../SearchWidget/SearchForm"
 import HomeIcon from "@/shared/ui/HomeIcon/HomeIcon";
 import Loader from '@/shared/ui/Loader/Loader';
+import ErrorBoundary from '@/shared/ui/ErrorBoundary/ErrorBoundary';
+import ErrorFallback from '@/shared/ui/ErrorFallback/ErrorFallback';
 
 const Layout = () => {
+
+    const location = useLocation();
 
     return (
         <>
@@ -13,9 +17,14 @@ const Layout = () => {
                 <HomeIcon />
             </header>
             <main>
-                <Suspense fallback={<Loader />}>
-                    <Outlet />
-                </Suspense>
+                <ErrorBoundary
+                    resetKey={location.key}
+                    fallback={(reset) => <ErrorFallback onRetry={reset} />}
+                >
+                    <Suspense fallback={<Loader />}>
+                        <Outlet />
+                    </Suspense>
+                </ErrorBoundary>
             </main>
         </>
     )

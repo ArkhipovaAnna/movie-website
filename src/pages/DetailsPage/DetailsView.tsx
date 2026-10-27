@@ -9,6 +9,7 @@ interface DetailsViewprops {
 }
 
 const DetailsView = ({ data }: DetailsViewprops) => {
+
     return (
         <div className={styles.wrapper}>
             <Poster url={data.posterUrl} />

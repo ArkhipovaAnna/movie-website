@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import App from './app/App.tsx';
 import { ApiError } from './shared/api/client.ts';
 import { ZodError } from 'zod';
+import ErrorBoundary from './shared/ui/ErrorBoundary/ErrorBoundary.tsx';
+import ErrorFallback from './shared/ui/ErrorFallback/ErrorFallback.tsx';
 
 const NO_RETRY_STATUSES = [402, 404, 429];
 const MAX_RETRIES = 1;
@@ -25,10 +27,12 @@ const queryClient = new QueryClient({
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </QueryClientProvider>
+    <ErrorBoundary fallback={() => <ErrorFallback onRetry={() => window.location.reload()} />}>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </QueryClientProvider>
+    </ErrorBoundary>
   </StrictMode>,
 )
