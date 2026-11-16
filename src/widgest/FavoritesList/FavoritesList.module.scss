@@ -1,0 +1,57 @@
+.list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.card {
+    position: relative;
+}
+
+.link {
+    display: block;
+    text-decoration: none;
+    color: var(--color-light-gray);
+
+    &:hover {
+        color: var(--color-yellow);
+    }
+}
+
+.poster {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.title {
+    margin: 8px 0 0;
+    font-size: 0.95rem;
+    font-weight: 400;
+}
+
+.year {
+    margin: 2px 0 0;
+    font-size: 0.8rem;
+    color: var(--color-gray);
+}
+
+.remove {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-color: rgba(0, 0, 0, 0.55);
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.75);
+    }
+}
+
+.message {
+    color: var(--color-gray);
+}

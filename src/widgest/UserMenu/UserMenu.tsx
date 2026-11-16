@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import { useAuthEmail, useAuthStatus } from '@/app/stores/use-auth-store';
 import { getAuthDialogActions } from '@/app/stores/use-auth-dialog-store';
 import useProfile from '@/features/auth/useProfile';
@@ -29,7 +30,9 @@ const UserMenu = () => {
 
     return (
         <div className={styles.menu}>
-            <span className={styles.nickname}>{profile?.nickname ?? email}</span>
+            <Link to="/profile" className={styles.nickname}>
+                {profile?.nickname ?? email}
+            </Link>
             <Button type="button" variant="outlined" onClick={() => signOut.mutate()}>
                 Выйти
             </Button>
