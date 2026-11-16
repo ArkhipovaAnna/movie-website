@@ -79,8 +79,20 @@ export const MoviesSearchResponseSchema = z.object({
 
 export const StaffListSchema = z.array(StaffSchema);
 
+export const VideoSchema = z.object({
+    url: z.string(),
+    name: text,
+    site: z.string(),
+});
+
+export const VideosResponseSchema = z.object({
+    items: z.array(VideoSchema),
+});
+
+
 export type Movie = z.infer<typeof MovieSchema>;
 export type Details = z.infer<typeof DetailsSchema>;
 export type Staff = z.infer<typeof StaffSchema>;
 export type Actor = z.infer<typeof ActorSchema>;
 export type IFilmographyItem = z.infer<typeof FilmographyItemSchema>;
+export type Video = z.infer<typeof VideoSchema>;

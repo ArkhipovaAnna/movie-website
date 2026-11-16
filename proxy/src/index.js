@@ -22,7 +22,9 @@ const ROUTES = [
         ttl: HOUR,
         params: { keyword: { re: /^.{1,100}$/s, required: true }, page: { re: PAGE } },
     },
+
     { path: /^\/api\/v2\.2\/films\/[1-9]\d{0,9}$/, ttl: DAY, params: {} },
+    { path: /^\/api\/v2\.2\/films\/[1-9]\d{0,9}\/videos$/, ttl: DAY, params: {} },
     { path: /^\/api\/v1\/staff$/, ttl: DAY, params: { filmId: { re: ID, required: true } } },
     { path: /^\/api\/v1\/staff\/[1-9]\d{0,9}$/, ttl: DAY, params: {} },
 ];

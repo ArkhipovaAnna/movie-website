@@ -4,6 +4,7 @@ import Rating from '../Rating/Rating';
 import Information from '../Information/Information';
 import SafeImage from '../SafeImage/SafeImage';
 import { Link } from 'react-router';
+import FavoriteButton from '@/features/favorites/FavoriteButton/FavoriteButton';
 
 interface MoviePreviewProps {
     movie: Movie | Details;
@@ -26,7 +27,10 @@ const MoviePreview = ({ movie }: MoviePreviewProps) => {
                 <Link to={`/details/${filmId}`} className={styles.link}>
                     <h2>{movie.nameRu || movie.nameEn}</h2>
                 </Link>
-                <Rating rating={rating} />
+                <div className={styles.actions}>
+                    <Rating rating={rating} />
+                    <FavoriteButton movie={movie} />
+                </div>
             </div>
             <div className={styles.content}>
                 <div className={styles.imgWrapper}>

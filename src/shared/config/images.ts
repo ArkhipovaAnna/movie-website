@@ -2,6 +2,7 @@
 export const ALLOWED_IMAGE_HOSTS: ReadonlySet<string> = new Set([
     'kinopoiskapiunofficial.tech',
     'st.kp.yandex.net',
+    'i.ytimg.com',
 ]);
 
 // Адрес «нет постера», который отдаёт API Кинопоиска.

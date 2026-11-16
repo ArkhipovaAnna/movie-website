@@ -15,6 +15,12 @@
     justify-content: space-between;
 }
 
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .link {
     text-decoration: none;
     color: var(--color-light-gray);

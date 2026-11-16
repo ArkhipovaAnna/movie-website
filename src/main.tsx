@@ -7,6 +7,8 @@ import { ApiError } from './shared/api/client.ts';
 import { ZodError } from 'zod';
 import ErrorBoundary from './shared/ui/ErrorBoundary/ErrorBoundary.tsx';
 import ErrorFallback from './shared/ui/ErrorFallback/ErrorFallback.tsx';
+import AuthSession from './features/auth/AuthSession.tsx';
+import PendingFavoriteApplier from './features/favorites/PendingFavoriteApplier.tsx';
 
 const NO_RETRY_STATUSES = [402, 404, 429];
 const MAX_RETRIES = 1;
@@ -22,6 +24,9 @@ const queryClient = new QueryClient({
         return failureCount < MAX_RETRIES;
       },
     },
+    mutations: {
+      networkMode: 'always',
+    }
   },
 });
 
@@ -29,6 +34,8 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ErrorBoundary fallback={() => <ErrorFallback onRetry={() => window.location.reload()} />}>
       <QueryClientProvider client={queryClient}>
+        <AuthSession />
+        <PendingFavoriteApplier />
         <BrowserRouter>
           <App />
         </BrowserRouter>

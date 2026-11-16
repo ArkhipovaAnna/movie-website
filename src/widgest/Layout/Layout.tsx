@@ -2,6 +2,8 @@ import { Suspense } from 'react';
 import { Outlet, useLocation } from "react-router";
 import SearchForm from "../SearchWidget/SearchForm"
 import HomeIcon from "@/shared/ui/HomeIcon/HomeIcon";
+import UserMenu from "../UserMenu/UserMenu";
+import AuthDialog from "@/features/auth/AuthDialog/AuthDialog";
 import Loader from '@/shared/ui/Loader/Loader';
 import ErrorBoundary from '@/shared/ui/ErrorBoundary/ErrorBoundary';
 import ErrorFallback from '@/shared/ui/ErrorFallback/ErrorFallback';
@@ -15,6 +17,8 @@ const Layout = () => {
             <header>
                 <SearchForm />
                 <HomeIcon />
+                <UserMenu />
+                <AuthDialog />
             </header>
             <main>
                 <ErrorBoundary

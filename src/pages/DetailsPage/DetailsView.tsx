@@ -2,6 +2,7 @@ import type { Details } from "@/entities/movie/interfaces";
 import InfoResult from "@/widgest/ResultWidget/InfoResult";
 import Poster from "@/widgest/ResultWidget/Poster";
 import Staff from "@/widgest/ResultWidget/Staff";
+import TrailerPlayer from "@/widgest/TrailerPlayer/TrailerPlayer";
 import styles from './DetailsView.module.scss'
 
 interface DetailsViewprops {
@@ -15,15 +16,7 @@ const DetailsView = ({ data }: DetailsViewprops) => {
             <Poster url={data.posterUrl} />
             <InfoResult data={data} />
             <Staff id={data.kinopoiskId} />
-            <div style={{
-                gridColumn: '1 / -1',
-                height: 100,
-                borderWidth: 2,
-                borderColor: 'orange',
-                borderStyle: 'solid',
-            }}>
-                Trailer
-            </div>
+            <TrailerPlayer key={data.kinopoiskId} filmId={data.kinopoiskId} />
         </div>
     )
 }

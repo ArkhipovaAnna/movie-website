@@ -4,6 +4,12 @@
     justify-content: space-between;
 }
 
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .wrapper h2 {
     line-height: 1;
     font-weight: bold;
