@@ -7,6 +7,7 @@ import AuthDialog from "@/features/auth/AuthDialog/AuthDialog";
 import Loader from '@/shared/ui/Loader/Loader';
 import ErrorBoundary from '@/shared/ui/ErrorBoundary/ErrorBoundary';
 import ErrorFallback from '@/shared/ui/ErrorFallback/ErrorFallback';
+import styles from './Layout.module.scss';
 
 const Layout = () => {
 
@@ -14,10 +15,12 @@ const Layout = () => {
 
     return (
         <>
-            <header>
-                <SearchForm />
+            <header className={styles.wrapper}>
                 <HomeIcon />
+                {/* <div className={styles.alignment}> */}
+                <SearchForm />
                 <UserMenu />
+                {/* </div> */}
                 <AuthDialog />
             </header>
             <main>

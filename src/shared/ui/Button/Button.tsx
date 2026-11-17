@@ -15,6 +15,7 @@ const Button = ({ children, type, variant, onClick }: ButtonProps) => {
             size="small"
             onClick={onClick}
             sx={{
+                height: 'var(--control-height)',
                 backgroundColor: 'gray',
                 color: 'black',
             }}

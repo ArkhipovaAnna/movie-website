@@ -24,11 +24,6 @@ const HomeIcon = () => {
             component={Link}
             to="/"
             aria-label="На главную"
-            sx={{
-                position: 'fixed',
-                top: 20,
-                left: 20,
-            }}
             onClick={() => {
                 setRequest('')
                 setCurrentPage(1)

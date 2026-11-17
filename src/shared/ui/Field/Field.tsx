@@ -18,6 +18,7 @@ const Field = ({ value, onChange }: FieldProps) => {
             sx={{
                 width: '40vw',
                 '& .MuiOutlinedInput-root': {
+                    height: 'var(--control-height)',
                     backgroundColor: 'gray',
                     '& fieldset': {
                         borderColor: 'black',

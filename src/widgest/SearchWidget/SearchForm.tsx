@@ -21,6 +21,7 @@ const SearchForm = () => {
         navigate('/');
         setRequest(searchFormValue);
         setCurrentPage(1);
+        setSearchFormValue('');
     };
 
     return (
