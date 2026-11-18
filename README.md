@@ -27,3 +27,4 @@
 - Supabase: Auth, PostgreSQL, Row Level Security
 - Cloudflare Worker: прокси к API Кинопоиска. Он прячет ключ API, ограничивает CORS по разрешённым адресам, кэширует ответы и ограничивает частоту запросов.
 
+Ссылка на сайт: https://movie-website.anna-movie-website.workers.dev
