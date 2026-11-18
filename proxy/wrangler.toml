@@ -4,7 +4,7 @@ compatibility_date = "2026-10-01"
 
 [vars]
 
-ALLOWED_ORIGINS = "http://localhost:5173, http://localhost:4173"
+ALLOWED_ORIGINS = "http://localhost:5173, http://localhost:4173, https://movie-website.anna-movie-website.workers.dev"
 
 [[ratelimits]]
 name = "LIMITER"

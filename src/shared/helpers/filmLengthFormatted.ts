@@ -15,7 +15,7 @@ const filmLengthFormatted = (filmLength: string | number | null) => {
         minutes = Number(parts[1]);
 
     } else {
-        return 'Неизвестно';
+        return null;
     }
 
     if (hours === 0) {

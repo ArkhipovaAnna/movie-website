@@ -23,8 +23,12 @@ const Information = ({ movie }: InformationProps) => {
                 <dd>{countries || 'Неизвестно'}</dd>
                 <dt>Жанр</dt>
                 <dd style={{ textTransform: 'capitalize' }}>{genres.length > 0 ? genres : 'Неизвестно'}</dd>
-                <dt>Продолжительность</dt>
-                <dd>{filmLength}</dd>
+                {filmLength && (
+                    <>
+                        <dt>Продолжительность</dt>
+                        <dd>{filmLength}</dd>
+                    </>
+                )}
             </dl>
             <p className={styles.description}>{movie.description}</p>
         </div>
