@@ -3,10 +3,9 @@ main = "src/index.js"
 compatibility_date = "2026-10-01"
 
 [vars]
-# Через запятую. Сюда нужны адреса вашего фронтенда, без слеша в конце.
-ALLOWED_ORIGINS = "http://localhost:5173"
 
-# Ограничение частоты запросов (необязательно, но рекомендую)
+ALLOWED_ORIGINS = "http://localhost:5173, http://localhost:4173"
+
 [[ratelimits]]
 name = "LIMITER"
 namespace_id = "1001"

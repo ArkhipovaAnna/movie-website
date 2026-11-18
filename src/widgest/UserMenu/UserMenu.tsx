@@ -43,7 +43,7 @@ const UserMenu = () => {
             <Link to="/profile" className={styles.nickname}>
                 {profile?.nickname ?? email}
             </Link>
-            <Button type="button" variant="outlined" onClick={() => {
+            <Button type="button" variant="contained" onClick={() => {
                 signOut.mutate()
                 setSearchFormValue('')
             }}>
